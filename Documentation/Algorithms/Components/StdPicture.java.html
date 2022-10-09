@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0079)https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/StdPicture.java.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="shortcut icon" href="https://algs4.cs.princeton.edu/favicon.ico">
+<link rel="stylesheet" href="./StdPicture.java_files/java.css" type="text/css">
+
+<title>StdPicture.java</title>
+
+
+<meta name="AUTHOR" content="Robert Sedgewick and Kevin Wayne">
+<meta name="DESCRIPTION" content="StdPicture code in Java">
+<meta name="TITLE" content="StdPicture code in Java">
+<meta name="KEYWORDS" content="StdPicture,java,programming,computer science,algorithm,data structure,program,code">
+<meta name="ROBOTS" content="INDEX,FOLLOW">
+
+</head>
+
+
+<body>
+<center><h1>StdPicture.java</h1></center><p><br>
+
+Below is the syntax highlighted version of <a href="https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/StdPicture.java">StdPicture.java</a>.
+</p><p><br>
+
+<!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span class="comment">/******************************************************************************</span>
+<span class="comment"> *  Compilation:  javac StdPicture.java</span>
+<span class="comment"> *  Execution:    java StdPicture filename.jpg</span>
+<span class="comment"> *  Dependencies: Picture.java</span>
+<span class="comment"> *</span>
+<span class="comment"> ******************************************************************************/</span>
+
+<span class="preproc">package</span><span class="normal"> edu</span><span class="symbol">.</span><span class="normal">princeton</span><span class="symbol">.</span><span class="normal">cs</span><span class="symbol">.</span><span class="normal">algs4</span><span class="symbol">;</span>
+
+
+<span class="comment">/**</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">Overview.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  The {</span><span class="type">@code</span><span class="comment"> StdPicture} class provides a basic capability for manipulating</span>
+<span class="comment"> *  the individual pixels of an image using the RGB color model.</span>
+<span class="comment"> *  You can either create a blank image (of a given dimension) or read an</span>
+<span class="comment"> *  image in a supported file format</span>
+<span class="comment"> *  (typically JPEG, PNG, GIF TIFF, and BMP).</span>
+<span class="comment"> *  This class also includes methods for displaying the image in a window</span>
+<span class="comment"> *  and saving it to a file.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;b&gt;</span><span class="comment">Use in the curriculum.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  The {</span><span class="type">@code</span><span class="comment"> StdPicture} class is intended for early usage in the</span>
+<span class="comment"> *  curriculum, before objects.</span>
+<span class="comment"> *  The {</span><span class="type">@link</span><span class="comment"> Picture} class is an object-oriented version that supports</span>
+<span class="comment"> *  manipulating multiple pictures at the same time.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;b&gt;</span><span class="comment">Getting started.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  To use this class, you must have {</span><span class="type">@code</span><span class="comment"> StdPicture} in your Java classpath.</span>
+<span class="comment"> *  Here are three possible ways to do this:</span>
+<span class="comment"> *  </span><span class="keyword">&lt;ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> If you ran our autoinstaller, use the commands</span>
+<span class="comment"> *  {</span><span class="type">@code</span><span class="comment"> javac-introcs} and {</span><span class="type">@code</span><span class="comment"> java-introcs} (or {</span><span class="type">@code</span><span class="comment"> javac-algs4}</span>
+<span class="comment"> *  and {</span><span class="type">@code</span><span class="comment"> java-algs4}) when compiling and executing. These commands</span>
+<span class="comment"> *  add {</span><span class="type">@code</span><span class="comment"> stdlib.jar} (or {</span><span class="type">@code</span><span class="comment"> algs4.jar}) to the Java classpath, which</span>
+<span class="comment"> *  provides access to {</span><span class="type">@code</span><span class="comment"> StdPicture}.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> Download </span><span class="keyword">&lt;a</span><span class="normal"> </span><span class="type">href</span><span class="normal"> </span><span class="symbol">=</span><span class="string"> "https://introcs.cs.princeton.edu/java/code/stdlib.jar"</span><span class="keyword">&gt;</span><span class="comment">stdlib.jar</span><span class="keyword">&lt;/a&gt;</span>
+<span class="comment"> *  (or </span><span class="keyword">&lt;a</span><span class="normal"> </span><span class="type">href</span><span class="normal"> </span><span class="symbol">=</span><span class="string"> "https://algs4.cs.princeton.edu/code/algs4.jar"</span><span class="keyword">&gt;</span><span class="comment">algs4.jar</span><span class="keyword">&lt;/a&gt;</span><span class="comment">)</span>
+<span class="comment"> *  and add it to the Java classpath.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> Download </span><span class="keyword">&lt;a</span><span class="normal"> </span><span class="type">href</span><span class="normal"> </span><span class="symbol">=</span><span class="string"> "https://introcs.cs.princeton.edu/java/stdlib/StdPicture.java"</span><span class="keyword">&gt;</span><span class="comment">StdPicture.java</span><span class="keyword">&lt;/a&gt;</span>
+<span class="comment"> *  and</span>
+<span class="comment"> *  </span><span class="keyword">&lt;a</span><span class="normal"> </span><span class="type">href</span><span class="normal"> </span><span class="symbol">=</span><span class="string"> "https://introcs.cs.princeton.edu/java/stdlib/Picture.java"</span><span class="keyword">&gt;</span><span class="comment">Picture.java</span><span class="keyword">&lt;/a&gt;</span>
+<span class="comment"> *  and put them in the working directory.</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/ul&gt;</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  As a test, cut-and-paste the following short program into your editor:</span>
+<span class="comment"> *  </span><span class="keyword">&lt;pre&gt;</span>
+<span class="comment"> *   public class TestStdPicture {</span>
+<span class="comment"> *       public static void main(String[] args) {</span>
+<span class="comment"> *           StdPicture.create("</span><span class="url">https://introcs.cs.princeton.edu/java/stdlib/mandrill.jpg</span><span class="comment">");</span>
+<span class="comment"> *           StdPicture.show();</span>
+<span class="comment"> *       }</span>
+<span class="comment"> *   }</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/pre&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  If you compile and execute the program, you should see a picture of a mandrill</span>
+<span class="comment"> *  (a colorful monkey native to west-central Africa) in a window.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;b&gt;</span><span class="comment">Anatomy of an image.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  An image is a </span><span class="keyword">&lt;em&gt;</span><span class="comment">width</span><span class="keyword">&lt;/em&gt;</span><span class="comment">-by-</span><span class="keyword">&lt;em&gt;</span><span class="comment">height</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> grid of pixels, with pixel (0, 0)</span>
+<span class="comment"> *  in the upper-left corner.</span>
+<span class="comment"> *  Each pixel has a color that is represented using the </span><span class="keyword">&lt;em&gt;</span><span class="comment">RGB color model</span><span class="keyword">&lt;/em&gt;</span><span class="comment">,</span>
+<span class="comment"> *  which specifies the levels of </span><span class="keyword">&lt;em&gt;</span><span class="comment">red</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> (R), </span><span class="keyword">&lt;em&gt;</span><span class="comment">green</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> (G), and </span><span class="keyword">&lt;em&gt;</span><span class="comment">blue</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> (B)</span>
+<span class="comment"> *  on an integer scale from 0 to 255.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;blockquote&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;img</span><span class="normal"> </span><span class="type">src</span><span class="normal"> </span><span class="symbol">=</span><span class="string"> "https://introcs.cs.princeton.edu/java/stdlib/AnatomyImage.png"</span><span class="normal"> </span><span class="type">width</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="string">200 alt </span><span class="normal">= </span><span class="string">"anatomy of an image"</span><span class="keyword">&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/blockquote&gt;</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;b&gt;</span><span class="comment">Getting and setting the colors of the individual pixels.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  You can use the following methods to retrieve the RGB components</span>
+<span class="comment"> *  of a specified pixel:</span>
+<span class="comment"> *  </span><span class="keyword">&lt;ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #getRed(int col, int row)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #getGreen(int col, int row)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #getBlue(int col, int row)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #setRGB(int col, int row, int r, int g, int b)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  The first three methods return the red, green, and blue components of pixel</span>
+<span class="comment"> *  (</span><span class="keyword">&lt;em&gt;</span><span class="comment">col</span><span class="keyword">&lt;/em&gt;</span><span class="comment">, </span><span class="keyword">&lt;em&gt;</span><span class="comment">row</span><span class="keyword">&lt;/em&gt;</span><span class="comment">). Each component is an integer between 0 and 255,</span>
+<span class="comment"> *  with 0 corresponding to the absence of that component and 255 corresponding</span>
+<span class="comment"> *  to full intensity of that component.</span>
+<span class="comment"> *  The last methods set the red, green, and blue components of pixel</span>
+<span class="comment"> *  (</span><span class="keyword">&lt;em&gt;</span><span class="comment">col</span><span class="keyword">&lt;/em&gt;</span><span class="comment">, </span><span class="keyword">&lt;em&gt;</span><span class="comment">row</span><span class="keyword">&lt;/em&gt;</span><span class="comment">) to the specified values.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">Iterating over the pixels.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  A common operation in image processing is to iterate over and process</span>
+<span class="comment"> *  all of the pixels in an image.</span>
+<span class="comment"> *  Here is a prototypical example that converts a color image</span>
+<span class="comment"> *  to grayscale, using the NTSC formula</span>
+<span class="comment"> *  </span><span class="keyword">&lt;em&gt;</span><span class="comment">Y</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> = 0.299</span><span class="keyword">&lt;em&gt;</span><span class="comment">r</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> + 0.587</span><span class="keyword">&lt;em&gt;</span><span class="comment">g</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> + 0.114</span><span class="keyword">&lt;em&gt;</span><span class="comment">b</span><span class="keyword">&lt;/em&gt;</span><span class="comment">.</span>
+<span class="comment"> *  Note that if the red, green, and blue components are all equal,</span>
+<span class="comment"> *  then the color is a shade of gray.</span>
+<span class="comment"> *  </span><span class="keyword">&lt;pre&gt;</span>
+<span class="comment"> *  StdPicture.create("</span><span class="url">https://introcs.cs.princeton.edu/java/stdlib/mandrill.jpg</span><span class="comment">");</span>
+<span class="comment"> *  for (int col = 0; col </span><span class="preproc">&amp;lt;</span><span class="comment"> StdPicture.width(); col++) {</span>
+<span class="comment"> *      for (int row = 0; row </span><span class="preproc">&amp;lt;</span><span class="comment"> StdPicture.height(); row++) {</span>
+<span class="comment"> *          int r = StdPicture.getRed(col, row);</span>
+<span class="comment"> *          int g = StdPicture.getGreen(col, row);</span>
+<span class="comment"> *          int b = StdPicture.getBlue(col, row);</span>
+<span class="comment"> *          int y = (int) (Math.round(0.299*r + 0.587*g + 0.114*b));</span>
+<span class="comment"> *          StdPicture.set(col, row, y, y, y);</span>
+<span class="comment"> *      }</span>
+<span class="comment"> *  }</span>
+<span class="comment"> *  StdPicture.show();</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/pre&gt;</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">Transparency.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  The {</span><span class="type">@code</span><span class="comment"> StdPicture} class supports transparent images, using the</span>
+<span class="comment"> *  ARGB color model. The folowing methods are useful for this:</span>
+<span class="comment"> *  </span><span class="keyword">&lt;ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #getAlpha(int col, int row)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #setARGB(int col, int row, int r, int g, int b, int a)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span>
+<span class="comment"> *  The first method gets the alpha component of pixel (</span><span class="keyword">&lt;em&gt;</span><span class="comment">col</span><span class="keyword">&lt;/em&gt;</span><span class="comment">, </span><span class="keyword">&lt;em&gt;</span><span class="comment">row</span><span class="keyword">&lt;/em&gt;</span><span class="comment">).</span>
+<span class="comment"> *  The second methods sets the red, green, blue, and alpha components of</span>
+<span class="comment"> *  pixel (</span><span class="keyword">&lt;em&gt;</span><span class="comment">col</span><span class="keyword">&lt;/em&gt;</span><span class="comment">, </span><span class="keyword">&lt;em&gt;</span><span class="comment">row</span><span class="keyword">&lt;/em&gt;</span><span class="comment">).</span>
+<span class="comment"> *  The alpha value defines the transparency of a color, with 0 corresponding to</span>
+<span class="comment"> *  completely transparent and 255 to completely opaque. If transparency is not</span>
+<span class="comment"> *  explicitly used, all alpha values are 255.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">File formats.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  The {</span><span class="type">@code</span><span class="comment"> Picture} class supports reading and writing images in</span>
+<span class="comment"> *  a supported format (typically JPEG, PNG, GIF TIFF, and BMP).</span>
+<span class="comment"> *  Note that some file format (such as JPEG and BMP) do not support transparency.</span>
+<span class="comment"> *  You can save the picture to a file using this method:</span>
+<span class="comment"> *  </span><span class="keyword">&lt;ul&gt;</span>
+<span class="comment"> *  </span><span class="keyword">&lt;li&gt;</span><span class="comment"> {</span><span class="type">@link</span><span class="comment"> #save(String filename)}</span>
+<span class="comment"> *  </span><span class="keyword">&lt;/ul&gt;</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;</span><span class="comment">Alternatively, you can save the picture interactively</span>
+<span class="comment"> *  by using the menu option </span><span class="keyword">&lt;em&gt;</span><span class="comment">File → Save</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> from the picture window.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">Memory usage.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  A </span><span class="keyword">&lt;em&gt;</span><span class="comment">W</span><span class="keyword">&lt;/em&gt;</span><span class="comment">-by-</span><span class="keyword">&lt;em&gt;</span><span class="comment">H</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> picture uses ~ 4 </span><span class="keyword">&lt;em&gt;</span><span class="comment">W H</span><span class="keyword">&lt;/em&gt;</span><span class="comment"> bytes of memory,</span>
+<span class="comment"> *  since the color of each pixel is encoded as a 32-bit </span><span class="keyword">&lt;code&gt;</span><span class="comment">int</span><span class="keyword">&lt;/code&gt;</span><span class="comment">.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="keyword">&lt;p&gt;&lt;b&gt;</span><span class="comment">Additional documentation.</span><span class="keyword">&lt;/b&gt;</span>
+<span class="comment"> *  For additional documentation, see</span>
+<span class="comment"> *  </span><span class="keyword">&lt;a</span><span class="normal"> </span><span class="type">href</span><span class="symbol">=</span><span class="string">"https://introcs.cs.princeton.edu/31datatype"</span><span class="keyword">&gt;</span><span class="comment">Section 3.1</span><span class="keyword">&lt;/a&gt;</span><span class="comment"> of</span>
+<span class="comment"> *  </span><span class="keyword">&lt;i&gt;</span><span class="comment">Computer Science: An Interdisciplinary Approach</span><span class="keyword">&lt;/i&gt;</span>
+<span class="comment"> *  by Robert Sedgewick and Kevin Wayne.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  </span><span class="type">@author</span><span class="comment"> Robert Sedgewick</span>
+<span class="comment"> *  </span><span class="type">@author</span><span class="comment"> Kevin Wayne</span>
+<span class="comment"> */</span>
+<span class="keyword">public</span><span class="normal"> </span><span class="keyword">final</span><span class="normal"> </span><span class="keyword">class</span><span class="normal"> </span><span class="classname">StdPicture</span><span class="normal"> </span><span class="cbracket">{</span>
+
+<span class="normal">    </span><span class="comment">// the default picture width and height</span>
+<span class="normal">    </span><span class="keyword">private</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">final</span><span class="normal"> </span><span class="type">int</span><span class="normal"> DEFAULT_SIZE </span><span class="symbol">=</span><span class="normal"> </span><span class="number">512</span><span class="symbol">;</span>
+
+<span class="normal">    </span><span class="comment">// the underlying picture</span>
+<span class="normal">    </span><span class="keyword">private</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="usertype">Picture</span><span class="normal"> picture </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">Picture</span><span class="symbol">(</span><span class="normal">DEFAULT_SIZE</span><span class="symbol">,</span><span class="normal"> DEFAULT_SIZE</span><span class="symbol">);</span>
+
+<span class="normal">    </span><span class="comment">// singleton pattern: client can't instantiate</span>
+<span class="normal">    </span><span class="keyword">private</span><span class="normal"> </span><span class="function">StdPicture</span><span class="symbol">()</span><span class="normal"> </span><span class="cbracket">{</span><span class="normal"> </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Creates a {</span><span class="type">@code</span><span class="comment"> width}-by-{</span><span class="type">@code</span><span class="comment"> height} picture, with {</span><span class="type">@code</span><span class="comment"> width} columns</span>
+<span class="comment">     * and {</span><span class="type">@code</span><span class="comment"> height} rows, where each pixel is black.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> width the width of the picture</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> height the height of the picture</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if {</span><span class="type">@code</span><span class="comment"> width} is negative or zero</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if {</span><span class="type">@code</span><span class="comment"> height} is negative or zero</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">create</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> width</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> height</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">picture</span><span class="symbol">.</span><span class="function">isVisible</span><span class="symbol">())</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            </span><span class="function">hide</span><span class="symbol">();</span>
+<span class="normal">            picture </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">Picture</span><span class="symbol">(</span><span class="normal">width</span><span class="symbol">,</span><span class="normal"> height</span><span class="symbol">);</span>
+<span class="normal">            </span><span class="function">show</span><span class="symbol">();</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">        </span><span class="keyword">else</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            picture </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">Picture</span><span class="symbol">(</span><span class="normal">width</span><span class="symbol">,</span><span class="normal"> height</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Creates a picture by reading an image from a file or URL.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment">  filename the name of the file (.png, .gif, or .jpg) or URL.</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if cannot read image</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if {</span><span class="type">@code</span><span class="comment"> name} is {</span><span class="type">@code</span><span class="comment"> null}</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">create</span><span class="symbol">(</span><span class="usertype">String</span><span class="normal"> filename</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">picture</span><span class="symbol">.</span><span class="function">isVisible</span><span class="symbol">())</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            </span><span class="function">hide</span><span class="symbol">();</span>
+<span class="normal">            picture </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">Picture</span><span class="symbol">(</span><span class="normal">filename</span><span class="symbol">);</span>
+<span class="normal">            </span><span class="function">show</span><span class="symbol">();</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">        </span><span class="keyword">else</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            picture </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">Picture</span><span class="symbol">(</span><span class="normal">filename</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Displays the picture in a window on the screen.</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">show</span><span class="symbol">()</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        picture</span><span class="symbol">.</span><span class="function">show</span><span class="symbol">();</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Hides the window on the screen containing the picture.</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">hide</span><span class="symbol">()</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        picture</span><span class="symbol">.</span><span class="function">hide</span><span class="symbol">();</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the height of the picture.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the height of the picture (in pixels)</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">height</span><span class="symbol">()</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">height</span><span class="symbol">();</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the width of the picture.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the width of the picture (in pixels)</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">width</span><span class="symbol">()</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">width</span><span class="symbol">();</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the alpha component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}).</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the alpha component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row})</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">getAlpha</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">getRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">rgb </span><span class="symbol">&gt;&gt;</span><span class="normal"> </span><span class="number">24</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal"> </span><span class="number">0xFF</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the red component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}).</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the red component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row})</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">getRed</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">getRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">rgb </span><span class="symbol">&gt;&gt;</span><span class="normal"> </span><span class="number">16</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal"> </span><span class="number">0xFF</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the green component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}).</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the green component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row})</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">getGreen</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">getRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">rgb </span><span class="symbol">&gt;&gt;</span><span class="normal"> </span><span class="number">8</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal"> </span><span class="number">0xFF</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Returns the blue component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}).</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@return</span><span class="comment"> the blue component of the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row})</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">int</span><span class="normal"> </span><span class="function">getBlue</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">getRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">rgb </span><span class="symbol">&gt;&gt;</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal"> </span><span class="number">0xFF</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Sets the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}) to given color.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> r the red component of the color</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> g the green component of the color</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> b the blue component of the color</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless {</span><span class="type">@code</span><span class="comment"> 0 &lt;= r &lt; 256}, {</span><span class="type">@code</span><span class="comment"> 0 &lt;= g &lt; 256},</span>
+<span class="comment">     *                                  and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= b &lt; 256}.</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">setRGB</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> r</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> g</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> b</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> a </span><span class="symbol">=</span><span class="normal"> </span><span class="number">255</span><span class="symbol">;</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">a </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">24</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">r </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">16</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">g </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">8</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">b </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">0</span><span class="symbol">);</span>
+<span class="normal">        picture</span><span class="symbol">.</span><span class="function">setRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">,</span><span class="normal"> rgb</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Sets the color of pixel ({</span><span class="type">@code</span><span class="comment"> col}, {</span><span class="type">@code</span><span class="comment"> row}) to given color.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> col the column index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> row the row index</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> a the alpha component of the color</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> r the red component of the color</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> g the green component of the color</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> b the blue component of the color</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless both {</span><span class="type">@code</span><span class="comment"> 0 &lt;= col &lt; width} and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= row &lt; height}</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException unless {</span><span class="type">@code</span><span class="comment"> 0 &lt;= a &lt; 256}, {</span><span class="type">@code</span><span class="comment"> 0 &lt;= r &lt; 256},</span>
+<span class="comment">     *                                         {</span><span class="type">@code</span><span class="comment"> 0 &lt;= g &lt; 256}, and {</span><span class="type">@code</span><span class="comment"> 0 &lt;= b &lt; 256}.</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">setARGB</span><span class="symbol">(</span><span class="type">int</span><span class="normal"> col</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> row</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> a</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> r</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> g</span><span class="symbol">,</span><span class="normal"> </span><span class="type">int</span><span class="normal"> b</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> rgb </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">a </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">24</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">r </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">16</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">g </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">8</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">|</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">b </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">0</span><span class="symbol">);</span>
+<span class="normal">        picture</span><span class="symbol">.</span><span class="function">setRGB</span><span class="symbol">(</span><span class="normal">col</span><span class="symbol">,</span><span class="normal"> row</span><span class="symbol">,</span><span class="normal"> rgb</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Saves the picture to a file in a supported format</span>
+<span class="comment">     * (typically JPEG, PNG, GIF TIFF, and BMP).</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> filename the name of the file</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if {</span><span class="type">@code</span><span class="comment"> filename} is {</span><span class="type">@code</span><span class="comment"> null}</span>
+<span class="comment">     * </span><span class="type">@throws</span><span class="comment"> IllegalArgumentException if {</span><span class="type">@code</span><span class="comment"> filename} is the empty string</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">save</span><span class="symbol">(</span><span class="usertype">String</span><span class="normal"> filename</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        picture</span><span class="symbol">.</span><span class="function">save</span><span class="symbol">(</span><span class="normal">filename</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="normal">   </span><span class="comment">/**</span>
+<span class="comment">     * Unit tests this {</span><span class="type">@code</span><span class="comment"> StdPicture} data type.</span>
+<span class="comment">     * Reads a picture specified by the command-line argument,</span>
+<span class="comment">     * and shows it in a window on the screen.</span>
+<span class="comment">     *</span>
+<span class="comment">     * </span><span class="type">@param</span><span class="comment"> args the command-line arguments</span>
+<span class="comment">     */</span>
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">main</span><span class="symbol">(</span><span class="normal">String</span><span class="symbol">[]</span><span class="normal"> args</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        StdPicture</span><span class="symbol">.</span><span class="function">create</span><span class="symbol">(</span><span class="normal">args</span><span class="symbol">[</span><span class="number">0</span><span class="symbol">]);</span>
+<span class="normal">        System</span><span class="symbol">.</span><span class="normal">out</span><span class="symbol">.</span><span class="function">printf</span><span class="symbol">(</span><span class="string">"%d-by-%d</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">width</span><span class="symbol">(),</span><span class="normal"> picture</span><span class="symbol">.</span><span class="function">height</span><span class="symbol">());</span>
+<span class="normal">        StdPicture</span><span class="symbol">.</span><span class="function">show</span><span class="symbol">();</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+
+<span class="cbracket">}</span>
+
+<span class="comment">/******************************************************************************</span>
+<span class="comment"> *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  This file is part of algs4.jar, which accompanies the textbook</span>
+<span class="comment"> *</span>
+<span class="comment"> *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,</span>
+<span class="comment"> *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.</span>
+<span class="comment"> *      </span><span class="url">http://algs4.cs.princeton.edu</span>
+<span class="comment"> *</span>
+<span class="comment"> *</span>
+<span class="comment"> *  algs4.jar is free software: you can redistribute it and/or modify</span>
+<span class="comment"> *  it under the terms of the GNU General Public License as published by</span>
+<span class="comment"> *  the Free Software Foundation, either version 3 of the License, or</span>
+<span class="comment"> *  (at your option) any later version.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  algs4.jar is distributed in the hope that it will be useful,</span>
+<span class="comment"> *  but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="comment"> *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="comment"> *  GNU General Public License for more details.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  You should have received a copy of the GNU General Public License</span>
+<span class="comment"> *  along with algs4.jar.  If not, see </span><span class="url">http://www.gnu.org/licenses.</span>
+<span class="comment"> ******************************************************************************/</span>
+</tt></pre>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./StdPicture.java_files/ga.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10811519-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+<p><br></p><address><small>
+Last updated: Fri Aug 12 13:05:48 EDT 2022.
+</small></address>
+
+
+</body></html>
