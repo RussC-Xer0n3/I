@@ -160,4 +160,28 @@ public class Interface_Helper {
     public static int getScreenPointPair_Y(ArrayList pair) {
         return pair.indexOf(1);
     }
+
+    public static ArrayList getTopOrBottom (ArrayList pair) {
+        int i, x, y;
+        ArrayList top = new ArrayList();
+        //for x and y in the pair
+        for (i = 0; i <= 1; i++){
+            switch (i) {
+                case 0:
+                    x = (int) pair.get(0);
+                    if (x >= getScreenCentre()) {
+                        top.add(pair);
+                    }
+                    break;
+                case 1:
+                    y = (int) pair.get(1);
+                    if (y >= getHalfHeight()) {
+                        top.add(pair);
+                    }
+                    break;
+            }
+        }
+        return top;
+    }
+
 }

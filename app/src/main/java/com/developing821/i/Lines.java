@@ -91,6 +91,7 @@ public class Lines {
      * @param n - Quantity of random points to generate on the horizontal line
      * @return ArrayList of the random points as point x,y pairs
      */
+    /*
     protected static ArrayList halfHorizontalRandomPoints(int n) {
 
         int s, i;
@@ -106,4 +107,5 @@ public class Lines {
         }
         return horizontalPoints;
     }
+    */
 }

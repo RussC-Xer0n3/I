@@ -31,11 +31,11 @@ public class Mesh extends Interface_Helper {
      *
      * @return ArrayList pair of x,y Coordinates
      */
-    public static ArrayList getRandomPoint() {
+    public static ArrayList getRandomAreaPoint() {
         int i, j, s, k;
 
         ArrayList areaPairs = new ArrayList();
-        ArrayList point = new ArrayList();
+        ArrayList randomAreaPoint = new ArrayList();
 
         //loop through the height and width
         for (i = 0; i<= getScreenHeight(); i++) {
@@ -54,10 +54,10 @@ public class Mesh extends Interface_Helper {
 
         //Get the index location of the pair in the new array List
         for (k = 0; k <= areaPairs.indexOf(s); k++) {
-            point.get(k);
+            randomAreaPoint.add(randomPoint.nextInt());
         }
         //Serve it to the masses :'D :'D !!
-        return point;
+        return randomAreaPoint;
     }
 
     /**
@@ -99,6 +99,8 @@ public class Mesh extends Interface_Helper {
      * We have - a 2 dimensional array of surface area vertices
      *           a 2 dimensional array of 200 vertices along the horizontal line
      *           a 2 dimensional array of the selected point
+     *           a 2 dimensional array of vertices above the halfway line
+     *           a 2 dimensional array of vertices below the halfway line
      *
      * @param canvas
      * @return ArrayList - of vertices and edges in the mesh
@@ -115,7 +117,6 @@ public class Mesh extends Interface_Helper {
 
         ArrayList drawRandomMesh = new ArrayList();
 
-
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
             //Return an array of endpoints vertices going up
@@ -127,7 +128,7 @@ public class Mesh extends Interface_Helper {
         }
 
         //MST
-        //Draw Edges
+            //Draw Edges
 
         //Return an array of vertices and edges
         return drawRandomMesh;
