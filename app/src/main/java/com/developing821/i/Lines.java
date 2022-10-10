@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Lines {
 
@@ -41,7 +42,6 @@ public class Lines {
      * selecting preferences.
      * @param canvas
      */
-    //TODO: set the colour ranges
     protected void drawHalfHorizontal(Canvas canvas) {
         int x1, x2, y1, y2;
 
@@ -61,7 +61,7 @@ public class Lines {
      *
      * @return halfHorizontal - all points as pair values as a single arraylist
      */
-    protected ArrayList halfHorizontal() {
+    protected static ArrayList halfHorizontal() {
         int x1, x2, y1, y2, i, j, k;
 
         ArrayList halfHorizontal = new ArrayList();
@@ -82,7 +82,28 @@ public class Lines {
                 }
             }
         }
-
         return halfHorizontal;
+    }
+
+    /**
+     * Generate random point pairs of x,y along the halfway horizontal line
+     *
+     * @param n - Quantity of random points to generate on the horizontal line
+     * @return ArrayList of the random points as point x,y pairs
+     */
+    protected static ArrayList halfHorizontalRandomPoints(int n) {
+
+        int s, i;
+        ArrayList points = new ArrayList(halfHorizontal());
+        ArrayList horizontalPoints = new ArrayList();
+
+        s = points.lastIndexOf(points);
+
+        Random point = new Random(s);
+
+        for (i = 0; i <= n; i++) {
+            horizontalPoints.add(points.indexOf(point.nextInt()));
+        }
+        return horizontalPoints;
     }
 }

@@ -28,4 +28,11 @@ public class Crashed {
         Log.e("ScreenWidth", String.valueOf(Interface_Helper.getScreenWidth()));
         System.exit(0);
     }
+     //TODO: fix the code here in the method
+    public static void emptyPair() {
+        Log.v("Mesh.class", "The index of x and or y are out of device screen dimension bounds and or empty!");
+        Log.e("IndexOutOfBounds", String.valueOf(Mesh.getScreenPointPair_X());
+        Log.e("ScreenHeight", String.valueOf(Mesh.getScreenPointPair_Y());
+        System.exit(0);
+    }
 }

@@ -1,5 +1,7 @@
 package com.developing821.i;
 
+import static com.developing821.i.Lines.halfHorizontal;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
@@ -20,30 +22,6 @@ public class Mesh extends Interface_Helper {
     private int b = getScreenWidth();
 
     private Paint paint = new Paint();
-
-    /**
-     * Get a new random x value from screen x and y coordinates
-     * @param a - getScreenHeight() as integer range value from callback
-     * @return integer x
-     */
-    public static int getRandomX(int a){
-        int x;
-        Random v = new Random(a);
-        x = v.nextInt();
-        return x;
-    }
-
-    /**
-     * Get a new random y value from screen x and y coordinates
-     * @param b - getScreenWidth() as integer range value from callback
-     * @return integer y
-     */
-    public static int getRandomY(int b) {
-        int y;
-        Random w = new Random(b);
-        y = w.nextInt();
-        return y;
-    }
 
     /**
      * Gather and return the x,y coordinates in a uw pair for
@@ -82,39 +60,50 @@ public class Mesh extends Interface_Helper {
         return point;
     }
 
-    //TODO: write method to get each x,y value from random point
-
     /**
+     * Cycles through with a (N(log(N))) for loop to calculate and add all
+     * coordinate pairs of the screen dimensions to an arraylist
      *
-     * @param canvas
-     * @param a
-     * @param b
+     * @return ArrayList surfacePairs - all points as pair values as a single arraylist
      */
-    protected  void drawRandomMesh(Canvas canvas, int a, int b) {
-        //Three random x values
-        int x1 = getRandomX(a);
-        int x2 = getRandomX(a);
-        int x3 = getRandomX(a);
+    protected ArrayList surfacePairs() {
+        int x1, x2, y1, y2, i, j;
 
-        //three random y values
-        int y1 = getRandomY(b);
-        int y2 = getRandomY(b);
-        int y3 = getRandomY(b);
+        ArrayList surfacePoints = new ArrayList();
 
-        // Draw a polygonal triangle and link the points with lines
-        canvas.drawLine(x1, y1, x2, y2, paint);
-        canvas.drawLine(x1, y1, x3, y3, paint);
-        canvas.drawLine(x3, y3, x2, y2, paint);
+        x1 = 0;
+        x2 = getScreenHeight();
+        y1 = 0;
+        y2 = getScreenWidth();
 
-        //We want to generate random points and link them to other points to draw the mesh
-        for (int i = 0; i <= 30; i++) {
-
-            int d1 = getRandomPoint(x1, y1);
-            int d2 = getRandomPoint(x2, y2);
-
-            for (int j = 0; j == 1; j++) {
-             //TODO: sort out the algorithm
+        //set value 0 as y1 and any point along the width between x1 and x2 as y2
+        for (i = y1; i <= y2; i++) {
+            //set half the height as 0 and then any point at half way up as x2
+            for (j = x1; j <= x2; j++) {
+                //Call to screenPointPair to add to out arraylist as points on the surface area
+                surfacePoints.add(screenPointPair(i, j));
             }
         }
+        return surfacePoints;
+    }
+
+    protected  void drawRandomMesh(Canvas canvas, ArrayList point) {
+
+        int i, j, k;
+
+        ArrayList surfacePairs = new ArrayList(surfacePairs());
+        ArrayList randomPoints = new ArrayList(getRandomPoint());
+        ArrayList halwaylinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(75));
+        ArrayList pairs = new ArrayList(point);
+
+        //We want to generate random points and link them to other points to draw the mesh
+        for (i = 0; i <= surfacePairs.lastIndexOf(surfacePairs); i++) {
+            //We need to do that from above and below the horizontal line
+        }
+
+        // Draw a polygonal triangle and link the points with lines
+
+
+
     }
 }
