@@ -87,23 +87,50 @@ public class Mesh extends Interface_Helper {
         return surfacePoints;
     }
 
-    protected  void drawRandomMesh(Canvas canvas, ArrayList point) {
 
+    /**
+     * We want to generate random points and link them to other points to draw the mesh
+     * In this instance we will look at MST and Spanning Forests making use of other methods
+     * to both draw the vertices and the edge (line) between each vertices representing
+     * connectivity points. We will work on the animation later and vertices are set at
+     * 200 constantly. Point A int the animation is from the horizontal line and point B
+     * the randomised end point of a restricted exploratory algorithm.
+     *
+     * We have - a 2 dimensional array of surface area vertices
+     *           a 2 dimensional array of 200 vertices along the horizontal line
+     *           a 2 dimensional array of the selected point
+     *
+     * @param canvas
+     * @return ArrayList - of vertices and edges in the mesh
+     */
+    protected ArrayList drawRandomMesh(Canvas canvas) {
+        final int _N = 200;
         int i, j, k;
 
         ArrayList surfacePairs = new ArrayList(surfacePairs());
-        ArrayList randomPoints = new ArrayList(getRandomPoint());
-        ArrayList halwaylinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(75));
-        ArrayList pairs = new ArrayList(point);
+        ArrayList halwaylinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(_N));
 
-        //We want to generate random points and link them to other points to draw the mesh
+        ArrayList up = new ArrayList();
+        ArrayList down = new ArrayList();
+
+        ArrayList drawRandomMesh = new ArrayList();
+
         for (i = 0; i <= surfacePairs.lastIndexOf(surfacePairs); i++) {
             //We need to do that from above and below the horizontal line
+            //Return an array of endpoints vertices going up
+            up.add(i+2);
+            for (j = i; j <= i; j++) {
+                //Return an array of endpoints vertices going down
+                down.add(j-1);
+            }
+
         }
 
-        // Draw a polygonal triangle and link the points with lines
+        //MST
+        //Draw Edges
 
-
-
+        //Return an array of vertices and edges
+        return drawRandomMesh;
     }
+
 }
