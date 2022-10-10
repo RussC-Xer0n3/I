@@ -161,7 +161,7 @@ public class Interface_Helper {
         return pair.indexOf(1);
     }
 
-    public static ArrayList getTopOrBottom (ArrayList pair) {
+    public static ArrayList isTop (ArrayList pair) {
         int i, x, y;
         ArrayList top = new ArrayList();
         //for x and y in the pair
@@ -175,7 +175,7 @@ public class Interface_Helper {
                     break;
                 case 1:
                     y = (int) pair.get(1);
-                    if (y >= getHalfHeight()) {
+                    if (y >= getScreenCentre()) {
                         top.add(pair);
                     }
                     break;
