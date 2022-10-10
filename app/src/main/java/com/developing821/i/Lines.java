@@ -86,26 +86,25 @@ public class Lines {
     }
 
     /**
-     * Generate random point pairs of x,y along the halfway horizontal line
+     * Generate equally distributed VERTICES of x,y along the halfway horizontal line
      *
      * @param n - Quantity of random points to generate on the horizontal line
      * @return ArrayList of the random points as point x,y pairs
      */
-    /*
-    protected static ArrayList halfHorizontalRandomPoints(int n) {
+    protected static ArrayList halfHorizontalPoints(int n) {
+        int s;
+        int i;
+        Object j;
+        s = getScreenWidth() / n;
 
-        int s, i;
         ArrayList points = new ArrayList(halfHorizontal());
         ArrayList horizontalPoints = new ArrayList();
 
-        s = points.lastIndexOf(points);
-
-        Random point = new Random(s);
-
-        for (i = 0; i <= n; i++) {
-            horizontalPoints.add(points.indexOf(point.nextInt()));
+        for (i = s; i <= n; i++) {
+            for (j = points.get(i);;){
+                horizontalPoints.add(j);
+            }
         }
         return horizontalPoints;
     }
-    */
 }

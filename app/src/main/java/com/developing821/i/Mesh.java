@@ -1,6 +1,6 @@
 package com.developing821.i;
 
-import static com.developing821.i.Lines.halfHorizontal;
+import static com.developing821.i.Lines.halfHorizontalPoints;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -87,6 +87,30 @@ public class Mesh extends Interface_Helper {
         return surfacePoints;
     }
 
+    protected static ArrayList equalPoints () {
+        final int _N = 200;
+        int i, j;
+
+        ArrayList halfwayLinePoints = new ArrayList(halfHorizontalPoints(_N));
+        ArrayList up = new ArrayList();
+        ArrayList down = new ArrayList();
+
+        //Equally divide the the vertices on the horizontal line with alternation
+        for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
+            //Return an array of endpoints vertices going up
+            up.add(i+2);
+            for (j = i;; j++) {
+                //Return an array of endpoints vertices going down
+                down.add(j-1);
+            }
+        }
+
+        ArrayList equalPairs = new ArrayList();
+        equalPairs.add(up);
+        equalPairs.add(down);
+
+        return equalPairs;
+    }
 
     /**
      * We want to generate random points and link them to other points to draw the mesh
@@ -110,25 +134,20 @@ public class Mesh extends Interface_Helper {
         int i, j, k;
 
         ArrayList surfacePairs = new ArrayList(surfacePairs());
-        ArrayList halfwayLinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(_N));
+        ArrayList equal = new ArrayList(equalPoints());
 
         ArrayList up = new ArrayList();
+        up.add(equal.get(0));
+
         ArrayList down = new ArrayList();
+        down.add(equal.get(1));
 
         ArrayList drawRandomMesh = new ArrayList();
 
-        //Equally divide the the vertices on the horizontal line with alternation
-        for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
-            //Return an array of endpoints vertices going up
-            up.add(i+2);
-            for (j = i;; j++) {
-                //Return an array of endpoints vertices going down
-                down.add(j-1);
-            }
-        }
+        //Set the random direction point of each vertices in up and down arraylists
 
-        //MST
-            //Draw Edges
+        //MST to ensure all connections are made
+            //Draw Edges of each connection to each vertices
 
         //Return an array of vertices and edges
         return drawRandomMesh;

@@ -162,21 +162,23 @@ public class Interface_Helper {
     }
 
     public static ArrayList isTop (ArrayList pair) {
-        int i, x, y;
+        int i;
         ArrayList top = new ArrayList();
-        //for x and y in the pair
+
         for (i = 0; i <= 1; i++){
             switch (i) {
                 case 0:
-                    x = (int) pair.get(0);
-                    if (x >= getScreenCentre()) {
+                    if (top.get(0) == null && (int) pair.get(0) >= (getScreenCentre() + getHalfWidth())) {
                         top.add(pair);
+                    } else {
+                        break;
                     }
                     break;
                 case 1:
-                    y = (int) pair.get(1);
-                    if (y >= getScreenCentre()) {
+                    if (top.get(0) == null && (int) pair.get(1) >= (getScreenCentre() + getHalfWidth())) {
                         top.add(pair);
+                    } else {
+                        break;
                     }
                     break;
             }
