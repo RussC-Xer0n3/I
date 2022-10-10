@@ -108,15 +108,16 @@ public class Mesh extends Interface_Helper {
         int i, j, k;
 
         ArrayList surfacePairs = new ArrayList(surfacePairs());
-        ArrayList halwaylinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(_N));
+        ArrayList halfwayLinePoints = new ArrayList(Lines.halfHorizontalRandomPoints(_N));
 
         ArrayList up = new ArrayList();
         ArrayList down = new ArrayList();
 
         ArrayList drawRandomMesh = new ArrayList();
 
+
         //Equally divide the the vertices on the horizontal line with alternation
-        for (i = 0; i <= surfacePairs.lastIndexOf(surfacePairs); i++) {
+        for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
             //Return an array of endpoints vertices going up
             up.add(i+2);
             for (j = i;; j++) {
