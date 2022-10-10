@@ -115,15 +115,14 @@ public class Mesh extends Interface_Helper {
 
         ArrayList drawRandomMesh = new ArrayList();
 
+        //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= surfacePairs.lastIndexOf(surfacePairs); i++) {
-            //We need to do that from above and below the horizontal line
             //Return an array of endpoints vertices going up
             up.add(i+2);
-            for (j = i; j <= i; j++) {
+            for (j = i;; j++) {
                 //Return an array of endpoints vertices going down
                 down.add(j-1);
             }
-
         }
 
         //MST
