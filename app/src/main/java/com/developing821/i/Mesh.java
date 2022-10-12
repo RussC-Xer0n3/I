@@ -134,43 +134,50 @@ public class Mesh extends Interface_Helper {
         int i, j, k ,x, y, z;
         boolean isTop;
 
-        ArrayList surfacePairs = new ArrayList(surfacePairs());
         ArrayList equal = new ArrayList(equalPoints());
+        ArrayList drawRandomMesh = new ArrayList();
+        ArrayList pairs = new ArrayList();
 
-        //get the first and second index of the 2 dimensional array and add to a new list as starting pointA
+        //pointA - get the first and second index of the 2 dimensional array
         ArrayList up = new ArrayList();
         ArrayList down = new ArrayList();
+
+        //pointB - Set the random direction point of each vertices in up and down arraylists
+        ArrayList upRandom = new ArrayList(99);
+        ArrayList downRandom = new ArrayList(99);
+
+        //Clear the arrayLists from last time
+        up.clear();
+        down.clear();
+        pairs.clear();
+        upRandom.clear();
+        downRandom.clear();
+
+        //Set pointA vertices
         for (i = 0; i <= equal.size(); i++) {
             up.add(equal.get(0));
             down.add(equal.get(1));
         }
 
-        //Set the random direction point of each vertices in up and down arraylists
-        ArrayList upRandom = new ArrayList();
-        ArrayList downRandom = new ArrayList();
-        ArrayList pairs = new ArrayList();
-
-        //Randomise x and y to get a vertices to add to the pairs list for pointB
+        //Randomise x and y to get pointB vertices
         for (j = 0; j <= 1000; j++) {
+
             pairs.add(getRandomAreaPoint());
+
             for (k = 0; k <= pairs.size(); k++) {
-                //find out if they are in the top half or bottom half
+                // ? Top half of screen ?
                 boolean top = isTop((ArrayList) pairs.get(k));
-                //add them as pointB for mesh growth
-                while (upRandom.size() < 100) {
-                if (top == true) {
+
+                if (top == true && upRandom.get(99) == null) {
                     upRandom.add(pairs.get(k));
-                } else {
-                    while (downRandom.size() < 100) {
-                        downRandom.add(pairs.get(k));
-                    }
-            }
-                if (upRandom.size() == 100 && downRandom.size() == 100) {
-                    j = 1000;
-                    break;
-                } else {
-                    continue;
+                } else if (top == false && downRandom.get(99) == null) {
+                    downRandom.add(pairs.get(k));
                 }
+            }
+
+            if (upRandom.get(99) != null && downRandom.get(99) != null) {
+                j = 1000;
+            }
         }
 
         //MST to ensure all connections are made
