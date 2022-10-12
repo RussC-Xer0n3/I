@@ -83,7 +83,7 @@ public class Mesh extends Interface_Helper {
         return surfacePoints;
     }
 
-    protected static ArrayList equalPoints () {
+    protected static ArrayList equalPoints() {
         final int _N = 200;
         int i, j;
 
@@ -95,10 +95,10 @@ public class Mesh extends Interface_Helper {
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
             //Return an array of endpoints vertices going up
-            up.add(halfwayLinePoints.get(i+2));
-            for (j = i;; j++) {
+            up.add(halfwayLinePoints.get(i + 2));
+            for (j = i; ; j++) {
                 //Return an array of endpoints vertices going down
-                down.add(halfwayLinePoints.get(j+1));
+                down.add(halfwayLinePoints.get(j + 1));
             }
         }
 
@@ -121,7 +121,7 @@ public class Mesh extends Interface_Helper {
      * @return ArrayList - of vertices and edges in the mesh
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
-        int i, j, k, m;
+        int i, j, k, m, o, p;
         boolean isTop;
 
         ArrayList equal = new ArrayList(equalPoints());
@@ -170,7 +170,7 @@ public class Mesh extends Interface_Helper {
 
             n.add(proximity_points.get(j));
 
-            for (k = 0;; j++) {
+            for (k = 0; ; j++) {
 
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) n.get(k));
@@ -189,11 +189,17 @@ public class Mesh extends Interface_Helper {
         }
 
         //Ensure all connections are made
+        ArrayList connection = new ArrayList();
 
+        //Start with top
+        for (o = 0; o <= upRandom.size() && o <= downRandom.size(); o++) {
+            for (p = 0; p <= upRandom.lastIndexOf(o) && p <= downRandom.lastIndexOf(o); p++) {
+                
+            }
+        }
             //Draw Edges of each connection to each vertices
-
         //Return an array of vertices and edges
         return drawRandomMesh;
     }
-
 }
+
