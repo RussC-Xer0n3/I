@@ -91,13 +91,14 @@ public class Mesh extends Interface_Helper {
         ArrayList up = new ArrayList();
         ArrayList down = new ArrayList();
 
+        up.add(halfwayLinePoints.get(0));
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
             //Return an array of endpoints vertices going up
-            up.add(i+2);
+            up.add(halfwayLinePoints.get(i+2));
             for (j = i;; j++) {
                 //Return an array of endpoints vertices going down
-                down.add(j-1);
+                down.add(halfwayLinePoints.get(j+1));
             }
         }
 
