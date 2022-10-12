@@ -14,19 +14,19 @@ import java.util.ArrayList;
 
 public class Proximity extends Mesh {
 
-    final double _PI = 3.14159265358;
+    static final double _PI = 3.14159265358;
 
     //Probst., R. 2021. In Android, how do I set margins in dp programmatically? [online] Available from: https://stackoverflow.com/questions/12728255/in-android-how-do-i-set-margins-in-dp-programmatically [12/10/2022].
     //H4Kr - https://stackoverflow.com/users/1713345/renato-probst
-    final int _red_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getDisplayMetrics());
-    final int _green_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 96, getDisplayMetrics());
-    final int _touch_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getDisplayMetrics());
+    static final int _red_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getDisplayMetrics());
+    static final int _green_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 96, getDisplayMetrics());
+    static final int _touch_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getDisplayMetrics());
 
     /**
      * Set the screen area as the proximity since all other metrics are included
      * @return screen area as Integer
      */
-    private DisplayMetrics getDisplayMetrics() {
+    private static DisplayMetrics getDisplayMetrics() {
         return getScreenArea();
     }
 
@@ -54,7 +54,7 @@ public class Proximity extends Mesh {
      * The touch area we want to use in dp minimum 48dp (icon size)
      * @return Integer
      */
-    public int Touch() {
+    public static int Touch() {
         return (int) Area(_PI, _touch_radius);
     }
 
@@ -62,7 +62,7 @@ public class Proximity extends Mesh {
      * The 'green zone' area we want to use in dp minimum 96dp (icon size)
      * @return Integer
      */
-    public int Green () {
+    public static int Green() {
         return (int) Area(_PI, _green_radius);
     }
 
@@ -70,7 +70,7 @@ public class Proximity extends Mesh {
      * The 'red zone' area we want to use in dp minimum 200dp (icon size)
      * @return Integer
      */
-    public int Red () {
+    public static int Red() {
         return (int) Area(_PI, _red_radius);
     }
 
@@ -80,7 +80,7 @@ public class Proximity extends Mesh {
      * @param point
      * @return ArrayList proximity - the x,y and the areas and circumferences
      */
-    public ArrayList proximity(ArrayList point) {
+    public static ArrayList proximity(ArrayList point) {
         ArrayList proximity = new ArrayList();
 
         int touch_circ = Circumference(_PI, _touch_radius);
