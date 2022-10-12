@@ -121,12 +121,11 @@ public class Mesh extends Interface_Helper {
      * @return ArrayList - of vertices and edges in the mesh
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
-        int i, j, k, l, m;
+        int i, j, k, m;
         boolean isTop;
 
         ArrayList equal = new ArrayList(equalPoints());
         ArrayList drawRandomMesh = new ArrayList();
-        ArrayList pairs = new ArrayList();
         ArrayList proximity_points = new ArrayList();
 
         //pointA - get the first and second index of the 2 dimensional array
@@ -143,14 +142,9 @@ public class Mesh extends Interface_Helper {
         upRandom.clear();
         downRandom.clear();
 
-        //Get a list of random pairs - clear later
-        for (l = 0; l <= 1000; l++) {
-            pairs.add(getRandomAreaPoint());
-        }
-
         //Add all the points with their proximities to ArrayList
-        for (m = 0; m <= pairs.size(); m++) {
-            proximity_points.add(Proximity.proximity((ArrayList) pairs.get(m)));
+        for (m = 0; m <= 1000; m++) {
+            proximity_points.add(Proximity.proximity(getRandomAreaPoint()));
         }
 
         //pointA - Set pointA vertices
@@ -158,12 +152,17 @@ public class Mesh extends Interface_Helper {
             up.add(equal.get(0));
             down.add(equal.get(1));
         }
-        
+
+        //Data processor buffer
+        ArrayList n = new ArrayList();
+
         //pointB - Randomise x and y to get pointB vertices
         for (j = 0; j <= proximity_points.size(); j++) {
-            ArrayList n = new ArrayList();
+
             n.add(proximity_points.get(j));
+
             for (k = 0;; j++) {
+
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) n.get(k));
 
@@ -179,7 +178,6 @@ public class Mesh extends Interface_Helper {
                 n.clear();
             }
         }
-        pairs.clear();
 
         //Ensure all connections are made
             //Draw Edges of each connection to each vertices
