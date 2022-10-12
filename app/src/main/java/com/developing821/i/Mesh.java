@@ -161,10 +161,11 @@ public class Mesh extends Interface_Helper {
         
         //pointB - Randomise x and y to get pointB vertices
         for (j = 0; j <= proximity_points.size(); j++) {
-            proximity_points.get(j);
+            ArrayList n = new ArrayList();
+            n.add(proximity_points.get(j));
             for (k = 0;; j++) {
                 // ? Top half of screen ?
-                boolean top = isTop((ArrayList) proximity_points.get(k));
+                boolean top = isTop((ArrayList) n.get(k));
 
                 if (top == true && upRandom.get(99) == null) {
                     if (!upRandom.contains(proximity_points.get(k))) {
@@ -175,6 +176,7 @@ public class Mesh extends Interface_Helper {
                         downRandom.add(proximity_points.get(j));
                     }
                 }
+                n.clear();
             }
         }
         pairs.clear();
