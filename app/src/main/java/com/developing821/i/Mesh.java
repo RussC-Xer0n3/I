@@ -149,23 +149,28 @@ public class Mesh extends Interface_Helper {
         ArrayList upRandom = new ArrayList();
         ArrayList downRandom = new ArrayList();
         ArrayList pairs = new ArrayList();
-        Random rand = new Random();
 
         //Randomise x and y to get a vertices to add to the pairs list for pointB
-        for (j = 0; j <= 200; j++) {
-            y = rand.nextInt(getScreenHeight());
-            x = rand.nextInt(getScreenWidth());
-            pairs.add(screenPointPair(x, y));
+        for (j = 0; j <= 1000; j++) {
+            pairs.add(getRandomAreaPoint());
             for (k = 0; k <= pairs.size(); k++) {
                 //find out if they are in the top half or bottom half
                 boolean top = isTop((ArrayList) pairs.get(k));
                 //add them as pointB for mesh growth
+                while (upRandom.size() < 100) {
                 if (top == true) {
                     upRandom.add(pairs.get(k));
                 } else {
-                    downRandom.add(pairs.get(k));
-                }
+                    while (downRandom.size() < 100) {
+                        downRandom.add(pairs.get(k));
+                    }
             }
+                if (upRandom.size() == 100 && downRandom.size() == 100) {
+                    j = 1000;
+                    break;
+                } else {
+                    continue;
+                }
         }
 
         //MST to ensure all connections are made
