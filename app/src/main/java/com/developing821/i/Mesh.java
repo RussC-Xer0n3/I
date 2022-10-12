@@ -117,17 +117,17 @@ public class Mesh extends Interface_Helper {
     protected ArrayList drawRandomMesh(Canvas canvas) {
         int i, j, k, m, o, p;
 
-        ArrayList equal = new ArrayList(equalPoints());
+        ArrayList<ArrayList <Object> > equal = new ArrayList<ArrayList <Object> >(equalPoints());
         ArrayList drawRandomMesh = new ArrayList();
         ArrayList proximity_points = new ArrayList();
 
         //pointA - get the first and second index of the 2 dimensional array
-        ArrayList up = new ArrayList();
-        ArrayList down = new ArrayList();
+        ArrayList<ArrayList<Object> > up = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList <Object> > down = new ArrayList<ArrayList <Object> >();
 
         //pointB - Set the random direction point of each vertices in up and down arraylists
-        ArrayList upRandom = new ArrayList(99);
-        ArrayList downRandom = new ArrayList(99);
+        ArrayList<ArrayList<Object>> upRandom = new ArrayList<>(99);
+        ArrayList<ArrayList<Object>> downRandom = new ArrayList<>(99);
 
         //Clear the arrayLists from last time
         up.clear();
@@ -151,8 +151,8 @@ public class Mesh extends Interface_Helper {
          * into two separate ArrayLists
          */
         for (i = 0; i <= equal.size(); i++) {
-            up.add(equal.get(0));
-            down.add(equal.get(1));
+            up.get(i).add(equal.get(0));
+            down.get(i).add(equal.get(1));
         }
 
         //Data processor buffer
@@ -163,18 +163,18 @@ public class Mesh extends Interface_Helper {
 
             n.add(proximity_points.get(j));
 
-            for (k = 0; ; j++) {
+            for (k = 0;; j++) {
 
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) n.get(k));
 
                 if (top == true && upRandom.get(99) == null) {
                     if (!upRandom.contains(proximity_points.get(k))) {
-                        upRandom.add(proximity_points.get(j));
+                        upRandom.add((ArrayList<Object>) proximity_points.get(j));
                     }
                 } else if (top == false && downRandom.get(99) == null) {
                     if (!downRandom.contains(proximity_points.get(k))) {
-                        downRandom.add(proximity_points.get(j));
+                        downRandom.add((ArrayList<Object>) proximity_points.get(j));
                     }
                 }
                 n.clear();
