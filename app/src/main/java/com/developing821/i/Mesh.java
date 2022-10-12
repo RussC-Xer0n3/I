@@ -142,12 +142,21 @@ public class Mesh extends Interface_Helper {
         upRandom.clear();
         downRandom.clear();
 
-        //Add all the points with their proximities to ArrayList
+        /**
+         * Add all the points with their proximities to ArrayList
+         * @return Multi-dimensional Arraylist [[x,y], Object, Object, Object, Object, Object, Object]
+         */
         for (m = 0; m <= 1000; m++) {
             proximity_points.add(Proximity.proximity(getRandomAreaPoint()));
         }
 
         //pointA - Set pointA vertices
+        /**
+         * Separates a multi-dimensional ArrayList of ArrayLists
+         * [ 0 [], [], []....
+         *   1 [], [], [].... ]
+         * into two separate ArrayLists
+         */
         for (i = 0; i <= equal.size(); i++) {
             up.add(equal.get(0));
             down.add(equal.get(1));
@@ -180,6 +189,7 @@ public class Mesh extends Interface_Helper {
         }
 
         //Ensure all connections are made
+
             //Draw Edges of each connection to each vertices
 
         //Return an array of vertices and edges
