@@ -38,7 +38,7 @@ public class Mesh extends Interface_Helper {
         ArrayList randomAreaPoint = new ArrayList();
 
         //loop through the height and width
-        for (i = 0; i<= getScreenHeight(); i++) {
+        for (i = 0; i <= getScreenHeight(); i++) {
             //calculate each point
             for (j = i; j <= getScreenWidth(); j++) {
                 //add them to array
@@ -131,20 +131,42 @@ public class Mesh extends Interface_Helper {
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
         final int _N = 200;
-        int i, j, k;
+        int i, j, k ,x, y, z;
+        boolean isTop;
 
         ArrayList surfacePairs = new ArrayList(surfacePairs());
         ArrayList equal = new ArrayList(equalPoints());
 
+        //get the first and second index of the 2 dimensional array and add to a new list as starting pointA
         ArrayList up = new ArrayList();
-        up.add(equal.get(0));
-
         ArrayList down = new ArrayList();
-        down.add(equal.get(1));
-
-        ArrayList drawRandomMesh = new ArrayList();
+        for (i = 0; i <= equal.size(); i++) {
+            up.add(equal.get(0));
+            down.add(equal.get(1));
+        }
 
         //Set the random direction point of each vertices in up and down arraylists
+        ArrayList upRandom = new ArrayList();
+        ArrayList downRandom = new ArrayList();
+        ArrayList pairs = new ArrayList();
+        Random rand = new Random();
+
+        //Randomise x and y to get a vertices to add to the pairs list for pointB
+        for (j = 0; j <= 200; j++) {
+            y = rand.nextInt(getScreenHeight());
+            x = rand.nextInt(getScreenWidth());
+            pairs.add(screenPointPair(x, y));
+            for (k = 0; k <= pairs.size(); k++) {
+                //find out if they are in the top half or bottom half
+                boolean top = isTop((ArrayList) pairs.get(k));
+                //add them as pointB for mesh growth
+                if (top == true) {
+                    upRandom.add(pairs.get(k));
+                } else {
+                    downRandom.add(pairs.get(k));
+                }
+            }
+        }
 
         //MST to ensure all connections are made
             //Draw Edges of each connection to each vertices

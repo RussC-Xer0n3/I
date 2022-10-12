@@ -161,24 +161,24 @@ public class Interface_Helper {
         return pair.indexOf(1);
     }
 
-    public static ArrayList isTop (ArrayList pair) {
+    public static boolean isTop (ArrayList pair) {
         int i;
-        ArrayList top = new ArrayList();
+        boolean top = false;
 
         for (i = 0; i <= 1; i++){
             switch (i) {
                 case 0:
-                    if (top.get(0) == null && (int) pair.get(0) >= (getScreenCentre() + getHalfWidth())) {
-                        top.add(pair);
+                    if ((int) pair.get(0) >= (getScreenCentre() + getHalfWidth())) {
+                        top = true;
                     } else {
-                        break;
+                        top = false;
                     }
                     break;
                 case 1:
-                    if (top.get(0) == null && (int) pair.get(1) >= (getScreenCentre() + getHalfWidth())) {
-                        top.add(pair);
+                    if ((int) pair.get(1) >= (getScreenCentre() + getHalfWidth())) {
+                        top = true;
                     } else {
-                        break;
+                        top = false;
                     }
                     break;
             }
