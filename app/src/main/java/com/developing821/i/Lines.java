@@ -71,7 +71,7 @@ public class Lines {
         y1 = getHalfHeight();
         y2 = getScreenWidth();
 
-        //set value 0 as y1 and any point along the width between x1 and x2 as y2
+        //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
         for (i = y1; i <= y2; i++) {
             //set half the height as 0 and then any point at half way up as x2
             for (j = i; j == x2; j++) {

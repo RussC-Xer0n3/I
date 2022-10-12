@@ -120,7 +120,6 @@ public class Mesh extends Interface_Helper {
      * @return ArrayList - of vertices and edges in the mesh
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
-        final int _N = 200;
         int i, j, k;
         boolean isTop;
 
