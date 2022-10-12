@@ -158,31 +158,26 @@ public class Mesh extends Interface_Helper {
             up.add(equal.get(0));
             down.add(equal.get(1));
         }
-
+        
         //pointB - Randomise x and y to get pointB vertices
-        for (j = 0; j <= pairs.size(); j++) {
-            for (k = 0; k <= j; k++) {
+        for (j = 0; j <= proximity_points.size(); j++) {
+            proximity_points.get(j);
+            for (k = 0;; j++) {
                 // ? Top half of screen ?
-                boolean top = isTop((ArrayList) pairs.get(k));
+                boolean top = isTop((ArrayList) proximity_points.get(k));
 
                 if (top == true && upRandom.get(99) == null) {
-                    if (!upRandom.contains(k)) {
-                        upRandom.add(pairs.get(k));
+                    if (!upRandom.contains(proximity_points.get(k))) {
+                        upRandom.add(proximity_points.get(j));
                     }
                 } else if (top == false && downRandom.get(99) == null) {
-                    if (!downRandom.contains(k)) {
-                        downRandom.add(pairs.get(k));
+                    if (!downRandom.contains(proximity_points.get(k))) {
+                        downRandom.add(proximity_points.get(j));
                     }
                 }
             }
-
-            //Validate both being full since each point on the horizontal, needs an end point
-            if (upRandom.get(99) != null && downRandom.get(99) != null) {
-                j = 1000;
-            }
         }
         pairs.clear();
-
 
         //Ensure all connections are made
             //Draw Edges of each connection to each vertices
