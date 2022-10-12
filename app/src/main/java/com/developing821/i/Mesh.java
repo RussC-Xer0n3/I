@@ -178,7 +178,7 @@ public class Mesh extends Interface_Helper {
         pairs.clear();
 
 
-        //MST to ensure all connections are made
+        //Ensure all connections are made
             //Draw Edges of each connection to each vertices
 
         //Return an array of vertices and edges

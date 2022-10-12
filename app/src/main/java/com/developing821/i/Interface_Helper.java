@@ -1,6 +1,8 @@
 package com.developing821.i;
 
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
+
 import java.util.ArrayList;
 
 /**
@@ -110,7 +112,7 @@ public class Interface_Helper {
      * Get and return the device square area
      * @return int
      */
-    public static int getScreenArea() {
+    public static DisplayMetrics getScreenArea() {
         return getScreenWidth() * getScreenHeight();
     }
 
