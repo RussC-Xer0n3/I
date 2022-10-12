@@ -17,10 +17,6 @@ import java.util.Random;
 
 public class Mesh extends Interface_Helper {
 
-    //Randomising the point of each x and y however drawlines excepts x and y only
-    private int a = getScreenHeight();
-    private int b = getScreenWidth();
-
     private Paint paint = new Paint();
 
     /**
@@ -53,8 +49,8 @@ public class Mesh extends Interface_Helper {
         Random randomPoint = new Random(s);
 
         //Get the index location of the pair in the new array List
-        for (k = 0; k <= areaPairs.indexOf(s); k++) {
-            randomAreaPoint.add(randomPoint.nextInt());
+        for (k = 0; k <= areaPairs.lastIndexOf(s); k++) {
+            randomAreaPoint.add(areaPairs.get(randomPoint.nextInt()));
         }
         //Serve it to the masses :'D :'D !!
         return randomAreaPoint;
@@ -120,18 +116,12 @@ public class Mesh extends Interface_Helper {
      * 200 constantly. Point A int the animation is from the horizontal line and point B
      * the randomised end point of a restricted exploratory algorithm.
      *
-     * We have - a 2 dimensional array of surface area vertices
-     *           a 2 dimensional array of 200 vertices along the horizontal line
-     *           a 2 dimensional array of the selected point
-     *           a 2 dimensional array of vertices above the halfway line
-     *           a 2 dimensional array of vertices below the halfway line
-     *
      * @param canvas
      * @return ArrayList - of vertices and edges in the mesh
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
         final int _N = 200;
-        int i, j, k ,x, y, z;
+        int i, j, k;
         boolean isTop;
 
         ArrayList equal = new ArrayList(equalPoints());
@@ -153,13 +143,13 @@ public class Mesh extends Interface_Helper {
         upRandom.clear();
         downRandom.clear();
 
-        //Set pointA vertices
+        //pointA - Set pointA vertices
         for (i = 0; i <= equal.size(); i++) {
             up.add(equal.get(0));
             down.add(equal.get(1));
         }
 
-        //Randomise x and y to get pointB vertices
+        //pointB - Randomise x and y to get pointB vertices
         for (j = 0; j <= 1000; j++) {
 
             pairs.add(getRandomAreaPoint());
@@ -175,6 +165,7 @@ public class Mesh extends Interface_Helper {
                 }
             }
 
+            //Validate both being full since each point on the horizontal, needs an end point
             if (upRandom.get(99) != null && downRandom.get(99) != null) {
                 j = 1000;
             }

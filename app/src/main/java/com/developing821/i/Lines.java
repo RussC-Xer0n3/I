@@ -51,7 +51,7 @@ public class Lines {
         y2 = getScreenWidth();
 
         //https://stackoverflow.com/questions/3616676/how-to-draw-a-line-in-android
-        paint.setStrokeWidth(2f);
+        paint.setStrokeWidth(1f);
         canvas.drawLine(x1, y1, x2, y2, paint);
     }
 

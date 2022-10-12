@@ -161,6 +161,13 @@ public class Interface_Helper {
         return pair.indexOf(1);
     }
 
+    /**
+     * Whether the point is in the top half os the screen or not from the endpoint of the
+     * horizontal line in the centre pixels of the screen
+     *
+     * @param pair
+     * @return boolean top
+     */
     public static boolean isTop (ArrayList pair) {
         int i;
         boolean top = false;
@@ -185,5 +192,4 @@ public class Interface_Helper {
         }
         return top;
     }
-
 }
