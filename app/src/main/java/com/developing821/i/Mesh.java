@@ -121,7 +121,7 @@ public class Mesh extends Interface_Helper {
      * @return ArrayList - of vertices and edges in the mesh
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
-        int i, j, k;
+        int i, j, k, l;
         boolean isTop;
 
         ArrayList equal = new ArrayList(equalPoints());
@@ -139,9 +139,13 @@ public class Mesh extends Interface_Helper {
         //Clear the arrayLists from last time
         up.clear();
         down.clear();
-        pairs.clear();
         upRandom.clear();
         downRandom.clear();
+
+        //Get a list of random pairs - clear later
+        for (l = 0; l <= 1000; l++) {
+            pairs.add(getRandomAreaPoint());
+        }
 
         //pointA - Set pointA vertices
         for (i = 0; i <= equal.size(); i++) {
@@ -150,18 +154,19 @@ public class Mesh extends Interface_Helper {
         }
 
         //pointB - Randomise x and y to get pointB vertices
-        for (j = 0; j <= 1000; j++) {
-
-            pairs.add(getRandomAreaPoint());
-
-            for (k = 0; k <= pairs.size(); k++) {
+        for (j = 0; j <= pairs.size(); j++) {
+            for (k = 0; k <= j; k++) {
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) pairs.get(k));
 
                 if (top == true && upRandom.get(99) == null) {
-                    upRandom.add(pairs.get(k));
+                    if (!upRandom.contains(k)) {
+                        upRandom.add(pairs.get(k));
+                    }
                 } else if (top == false && downRandom.get(99) == null) {
-                    downRandom.add(pairs.get(k));
+                    if (!downRandom.contains(k)) {
+                        downRandom.add(pairs.get(k));
+                    }
                 }
             }
 
@@ -170,6 +175,8 @@ public class Mesh extends Interface_Helper {
                 j = 1000;
             }
         }
+        pairs.clear();
+
 
         //MST to ensure all connections are made
             //Draw Edges of each connection to each vertices
