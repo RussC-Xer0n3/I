@@ -116,7 +116,6 @@ public class Mesh extends Interface_Helper {
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
         int i, j, k, m, o, p;
-        boolean isTop;
 
         ArrayList equal = new ArrayList(equalPoints());
         ArrayList drawRandomMesh = new ArrayList();
