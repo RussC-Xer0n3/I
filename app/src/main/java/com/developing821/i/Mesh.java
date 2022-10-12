@@ -122,8 +122,8 @@ public class Mesh extends Interface_Helper {
         ArrayList proximity_points = new ArrayList();
 
         //pointA - get the first and second index of the 2 dimensional array
-        ArrayList<ArrayList<Object> > up = new ArrayList<ArrayList <Object> >();
-        ArrayList<ArrayList <Object> > down = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList<Object>> up = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList<Object>> down = new ArrayList<ArrayList <Object> >();
 
         //pointB - Set the random direction point of each vertices in up and down arraylists
         ArrayList<ArrayList<Object>> upRandom = new ArrayList<>(99);
@@ -168,6 +168,7 @@ public class Mesh extends Interface_Helper {
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) n.get(k));
 
+                //if top and upRandom does't contain it, add it else add it to downRandom if not top
                 if (top == true && upRandom.get(99) == null) {
                     if (!upRandom.contains(proximity_points.get(k))) {
                         upRandom.add((ArrayList<Object>) proximity_points.get(j));
