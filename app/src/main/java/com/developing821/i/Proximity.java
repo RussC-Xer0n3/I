@@ -16,10 +16,12 @@ public class Proximity extends Mesh {
 
     static final double _PI = 3.14159265358;
 
+    static final int pi = (int) _PI;
+
     //Probst., R. 2021. In Android, how do I set margins in dp programmatically? [online] Available from: https://stackoverflow.com/questions/12728255/in-android-how-do-i-set-margins-in-dp-programmatically [12/10/2022].
     //H4Kr - https://stackoverflow.com/users/1713345/renato-probst
-    static final int _red_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getDisplayMetrics());
-    static final int _green_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 96, getDisplayMetrics());
+    static final int _red_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getDisplayMetrics());
+    static final int _green_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getDisplayMetrics());
     static final int _touch_radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getDisplayMetrics());
 
     /**
@@ -32,46 +34,44 @@ public class Proximity extends Mesh {
 
     /**
      * Calculate and return the Area given n value and Pi
-     * @param _PI
+     * @param pi
      * @param n
-     * @return Integer value of circumference
+     * @return null, just process
      */
-    public static int Circumference(double _PI, int n) {
-        return (int) _PI * n;
+    public static Object Circumference(int pi, int n) { int i = pi * n;
+        return null;
     }
 
     /**
      * Calculate and return the Area given n value and Pi
-     * @param _PI
+     * @param pi
      * @param n
      * @return Integer value of area
      */
-    public static int Area(double _PI, int n) {
-        return (int) _PI * (n * 2);
-    }
+    public static void Area(int pi, int n) { int i = pi * (n * 2); }
 
     /**
      * The touch area we want to use in dp minimum 48dp (icon size)
-     * @return Integer
+     * @return null, just process
      */
-    public static int Touch() {
-        return (int) Area(_PI, _touch_radius);
+    public static Object Touch(int pi, int _touch_radius) { Area(pi, _touch_radius);
+        return null;
     }
 
     /**
      * The 'green zone' area we want to use in dp minimum 96dp (icon size)
-     * @return Integer
+     * @return null, just process
      */
-    public static int Green() {
-        return (int) Area(_PI, _green_radius);
+    public static Object Green(int pi, int _green_radius) { Area(pi, _green_radius);
+        return null;
     }
 
     /**
      * The 'red zone' area we want to use in dp minimum 200dp (icon size)
-     * @return Integer
+     * @return null, just process
      */
-    public static int Red() {
-        return (int) Area(_PI, _red_radius);
+    public static Object Red(int pi, int _red_radius) { Area(pi, _red_radius);
+        return null;
     }
 
     /**
@@ -83,17 +83,13 @@ public class Proximity extends Mesh {
     public static ArrayList proximity(ArrayList point) {
         ArrayList proximity = new ArrayList();
 
-        int touch_circ = Circumference(_PI, _touch_radius);
-        int green_circ = Circumference(_PI, _touch_radius);
-        int red_circ = Circumference(_PI, _touch_radius);
-
         proximity.add(point);
-        proximity.add(Touch());
-        proximity.add(touch_circ);
-        proximity.add(Green());
-        proximity.add(green_circ);
-        proximity.add(Red());
-        proximity.add(red_circ);
+        proximity.add(Touch(pi, _touch_radius));
+        proximity.add(Circumference(pi, _touch_radius));
+        proximity.add(Green(pi, _green_radius));
+        proximity.add(Circumference(pi, _green_radius));
+        proximity.add(Red(pi, _red_radius));
+        proximity.add(Circumference(pi, _red_radius));
 
         return proximity;
     }
