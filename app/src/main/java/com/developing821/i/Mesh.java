@@ -30,17 +30,8 @@ public class Mesh extends Interface_Helper {
     public static ArrayList getRandomAreaPoint() {
         int i, j, s, k;
 
-        ArrayList areaPairs = new ArrayList();
-        ArrayList randomAreaPoint = new ArrayList();
-
-        //loop through the height and width
-        for (i = 0; i <= getScreenHeight(); i++) {
-            //calculate each point
-            for (j = i; j <= getScreenWidth(); j++) {
-                //add them to array
-                areaPairs.add(i, j);
-            }
-        }
+        ArrayList<ArrayList <Integer> > areaPairs = new ArrayList<ArrayList <Integer>>(surfacePairs());
+        ArrayList<ArrayList <Object> > randomAreaPoint = new ArrayList<ArrayList <Object> >();
 
         //get the size of the entire array list
         s = areaPairs.size();
@@ -49,8 +40,8 @@ public class Mesh extends Interface_Helper {
         Random randomPoint = new Random(s);
 
         //Get the index location of the pair in the new array List
-        for (k = 0; k <= areaPairs.lastIndexOf(s); k++) {
-            randomAreaPoint.add(areaPairs.get(randomPoint.nextInt()));
+        for (k = 0; k <= 200; k++) {
+            randomAreaPoint.get(k).add(areaPairs.get(randomPoint.nextInt()));
         }
         //Serve it to the masses :'D :'D !!
         return randomAreaPoint;
@@ -62,22 +53,25 @@ public class Mesh extends Interface_Helper {
      *
      * @return ArrayList surfacePairs - all points as pair values as a single arraylist
      */
-    protected ArrayList surfacePairs() {
-        int x1, x2, y1, y2, i, j;
+    protected static ArrayList surfacePairs() {
+        int x1, x2, y1, y2, i, j, k;
 
-        ArrayList surfacePoints = new ArrayList();
+        int n = getScreenHeight() * getScreenWidth();
+        ArrayList<ArrayList <Object> > surfacePoints = new ArrayList<ArrayList <Object> >();
 
         x1 = 0;
         x2 = getScreenHeight();
         y1 = 0;
         y2 = getScreenWidth();
 
-        //set value 0 as y1 and any point along the width between x1 and x2 as y2
-        for (i = y1; i <= y2; i++) {
-            //set half the height as 0 and then any point at half way up as x2
-            for (j = x1; j <= x2; j++) {
-                //Call to screenPointPair to add to out arraylist as points on the surface area
-                surfacePoints.add(screenPointPair(i, j));
+        for (k = 0; k <= n; k++) {
+            //set value 0 as y1 and any point along the width between x1 and x2 as y2
+            for (i = y1; i <= y2; i++) {
+                //set half the height as 0 and then any point at half way up as x2
+                for (j = x1; j <= x2; j++) {
+                    //Call to screenPointPair to add to out arraylist as points on the surface area
+                    surfacePoints.get(k).add(screenPointPair(i, j));
+                }
             }
         }
         return surfacePoints;
@@ -87,24 +81,24 @@ public class Mesh extends Interface_Helper {
         final int _N = 200;
         int i, j;
 
-        ArrayList halfwayLinePoints = new ArrayList(halfHorizontalPoints(_N));
-        ArrayList up = new ArrayList();
-        ArrayList down = new ArrayList();
+        ArrayList<ArrayList <Object> > halfwayLinePoints = new ArrayList<ArrayList <Object> >(halfHorizontalPoints(_N));
+        ArrayList<ArrayList <Object> > up = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList <Object> > down = new ArrayList<ArrayList <Object> >();
 
-        up.add(halfwayLinePoints.get(0));
+        up.get(0).add(halfwayLinePoints.get(0));
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
             //Return an array of endpoints vertices going up
-            up.add(halfwayLinePoints.get(i + 2));
+            up.get(i).add(halfwayLinePoints.get(i + 2));
             for (j = i; ; j++) {
                 //Return an array of endpoints vertices going down
-                down.add(halfwayLinePoints.get(j + 1));
+                down.get(j).add(halfwayLinePoints.get(j + 1));
             }
         }
 
-        ArrayList equalPairs = new ArrayList();
-        equalPairs.add(up);
-        equalPairs.add(down);
+        ArrayList<ArrayList<Object> > equalPairs = new ArrayList();
+        equalPairs.get(0).add(up);
+        equalPairs.get(1).add(down);
 
         return equalPairs;
     }
@@ -191,10 +185,11 @@ public class Mesh extends Interface_Helper {
         //Ensure all connections are made
         ArrayList connection = new ArrayList();
 
-        //Start with top
+
         for (o = 0; o <= upRandom.size() && o <= downRandom.size(); o++) {
+
             for (p = 0; p <= upRandom.lastIndexOf(o) && p <= downRandom.lastIndexOf(o); p++) {
-                
+
             }
         }
             //Draw Edges of each connection to each vertices

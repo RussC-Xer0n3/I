@@ -1,6 +1,7 @@
 package com.developing821.i;
 
 import static com.developing821.i.Interface_Helper.getHalfHeight;
+import static com.developing821.i.Interface_Helper.getHalfWidth;
 import static com.developing821.i.Interface_Helper.getScreenPointPair_X;
 import static com.developing821.i.Interface_Helper.getScreenPointPair_Y;
 import static com.developing821.i.Interface_Helper.getScreenWidth;
@@ -62,23 +63,25 @@ public class Lines {
      * @return halfHorizontal - all points as pair values as a single arraylist
      */
     protected static ArrayList halfHorizontal() {
-        int x1, x2, y1, y2, i, j, k;
+        int x1, x2, y1, y2, i, j, k, l;
 
-        ArrayList halfHorizontal = new ArrayList();
+        ArrayList<ArrayList<Object> > halfHorizontal = new ArrayList<ArrayList<Object> >();
 
         x1 = getHalfHeight();
         x2 = getHalfHeight();
         y1 = getHalfHeight();
         y2 = getScreenWidth();
 
-        //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
-        for (i = y1; i <= y2; i++) {
-            //set half the height as 0 and then any point at half way up as x2
-            for (j = i; j == x2; j++) {
-                //enforce x1 and y1 to stay at 0 and set the points on the halfway as pairs
-                for (k = y1; k == x1 + y1; k++) {
-                    //Call to screenPointPair to add to out arraylist as points on the line
-                    halfHorizontal.add(screenPointPair(k, j));
+        for (l = 0; l <= getScreenWidth(); l++) {
+            //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
+            for (i = y1; i <= y2; i++) {
+                //set half the height as 0 and then any point at half way up as x2
+                for (j = i; j == x2; j++) {
+                    //enforce x1 and y1 to stay at 0 and set the points on the halfway as pairs
+                    for (k = y1; k == x1 + y1; k++) {
+                        //Call to screenPointPair to add to out arraylist as points on the line
+                        halfHorizontal.get(l).add(screenPointPair(k, j));
+                    }
                 }
             }
         }
@@ -92,17 +95,22 @@ public class Lines {
      * @return ArrayList of the random points as point x,y pairs
      */
     protected static ArrayList halfHorizontalPoints(int n) {
-        int s;
-        int i;
+        int s, i, k;
         Object j;
         s = getScreenWidth() / n;
 
-        ArrayList points = new ArrayList(halfHorizontal());
-        ArrayList horizontalPoints = new ArrayList();
+        ArrayList<ArrayList<ArrayList<Object> > > points = new ArrayList<ArrayList<ArrayList<Object> > >(halfHorizontal());
+        ArrayList<ArrayList<Object> > horizontalPoints = new ArrayList<ArrayList<Object> >();
 
-        for (i = s; i <= n; i++) {
-            for (j = points.get(i);;){
-                horizontalPoints.add(j);
+        //for the quantity n (200)
+        for (k = 0; k <= n; k++) {
+            //Step through at intervals of width / 200 for the entirety of k (200 points)
+            for (i = s; i <= n; i++) {
+                //for the object of j get the value at ith index of points
+                for (j = points.get(i); ; ) {
+                    //add it to a new ArrayList
+                    horizontalPoints.get(k).add(j);
+                }
             }
         }
         return horizontalPoints;

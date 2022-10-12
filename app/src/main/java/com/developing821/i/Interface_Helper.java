@@ -112,9 +112,7 @@ public class Interface_Helper {
      * Get and return the device square area
      * @return int
      */
-    public static DisplayMetrics getScreenArea() {
-        return getScreenWidth() * getScreenHeight();
-    }
+    public static int getScreenArea() { return getScreenWidth() * getScreenHeight(); }
 
     /**
      * Get and return half the height
@@ -174,21 +172,17 @@ public class Interface_Helper {
         int i;
         boolean top = false;
 
+        //only checking the x values to reduce computation costs
         for (i = 0; i <= 1; i++){
             switch (i) {
                 case 0:
-                    if ((int) pair.get(0) >= (getScreenCentre() + getHalfWidth())) {
+                    if ((int) pair.get(0) >= getHalfHeight()) {
                         top = true;
                     } else {
                         top = false;
                     }
                     break;
                 case 1:
-                    if ((int) pair.get(1) >= (getScreenCentre() + getHalfWidth())) {
-                        top = true;
-                    } else {
-                        top = false;
-                    }
                     break;
             }
         }

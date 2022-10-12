@@ -1,5 +1,6 @@
 package com.developing821.i;
 
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -26,10 +27,10 @@ public class Proximity extends Mesh {
 
     /**
      * Set the screen area as the proximity since all other metrics are included
-     * @return screen area as Integer
+     * @return Resources.getSystem().getDisplayMetrics()
      */
     private static DisplayMetrics getDisplayMetrics() {
-        return getScreenArea();
+        return Resources.getSystem().getDisplayMetrics();
     }
 
     /**
@@ -81,15 +82,15 @@ public class Proximity extends Mesh {
      * @return ArrayList proximity - the x,y and the areas and circumferences
      */
     public static ArrayList proximity(ArrayList point) {
-        ArrayList proximity = new ArrayList();
+        ArrayList<ArrayList<Object> > proximity = new ArrayList<ArrayList<Object> >();
 
-        proximity.add(point);
-        proximity.add(Touch(pi, _touch_radius));
-        proximity.add(Circumference(pi, _touch_radius));
-        proximity.add(Green(pi, _green_radius));
-        proximity.add(Circumference(pi, _green_radius));
-        proximity.add(Red(pi, _red_radius));
-        proximity.add(Circumference(pi, _red_radius));
+        proximity.get(0).add(point);
+        proximity.get(1).add(Touch(pi, _touch_radius));
+        proximity.get(2).add(Circumference(pi, _touch_radius));
+        proximity.get(3).add(Green(pi, _green_radius));
+        proximity.get(4).add(Circumference(pi, _green_radius));
+        proximity.get(5).add(Red(pi, _red_radius));
+        proximity.get(6).add(Circumference(pi, _red_radius));
 
         return proximity;
     }
