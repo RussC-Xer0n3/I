@@ -1,7 +1,6 @@
 package com.developing821.i;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
@@ -9,7 +8,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class DeviceHelperUnitTests {
+public class Interface_HelperUnitTests {
     /**
      * Test that the getters and setters are working
      * properly for the device size
