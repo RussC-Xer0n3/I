@@ -29,9 +29,8 @@ public class Mesh extends Interface_Helper {
      */
     public static ArrayList getRandomAreaPoint() {
         int i, j, s, k;
-
         ArrayList<ArrayList <Integer> > areaPairs = new ArrayList<ArrayList <Integer>>(surfacePairs());
-        ArrayList<ArrayList <Object> > randomAreaPoint = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList <Object> > randomAreaPoint = new ArrayList<>();
 
         //get the size of the entire array list
         s = areaPairs.size();
@@ -55,9 +54,8 @@ public class Mesh extends Interface_Helper {
      */
     protected static ArrayList surfacePairs() {
         int x1, x2, y1, y2, i, j, k;
-
         int n = getScreenHeight() * getScreenWidth();
-        ArrayList<ArrayList <Object> > surfacePoints = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList <Object> > surfacePoints = new ArrayList<>();
 
         x1 = 0;
         x2 = getScreenHeight();
@@ -82,8 +80,8 @@ public class Mesh extends Interface_Helper {
         int i;
 
         ArrayList<ArrayList <Object> > halfwayLinePoints = new ArrayList<ArrayList <Object> >(halfHorizontalPoints(_N));
-        ArrayList<ArrayList <Object> > up = new ArrayList<ArrayList <Object> >();
-        ArrayList<ArrayList <Object> > down = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList <Object> > up = new ArrayList<>();
+        ArrayList<ArrayList <Object> > down = new ArrayList<>();
 
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
@@ -110,31 +108,41 @@ public class Mesh extends Interface_Helper {
      * the randomised end point of a restricted exploratory algorithm.
      *
      * @param canvas
-     * @return ArrayList - of vertices and edges in the mesh
+     * @return 4-D ArrayList - of vertices and edges in the mesh with their proximities
      */
     protected ArrayList drawRandomMesh(Canvas canvas) {
         int i, j, k, m, o, p;
 
         //Buffers
         ArrayList<ArrayList <Object>> equal = new ArrayList<ArrayList <Object>>(equalPoints());
-        ArrayList<ArrayList <Object>> proximity_points = new ArrayList<ArrayList <Object>>();
+        ArrayList<ArrayList <Object>> proximity_points = new ArrayList<>();
 
         //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
-        ArrayList<ArrayList<Object>> up = new ArrayList<ArrayList <Object> >();
-        ArrayList<ArrayList<Object>> down = new ArrayList<ArrayList <Object> >();
+        ArrayList<ArrayList<Object>> up = new ArrayList<>();
+        ArrayList<ArrayList<Object>> down = new ArrayList<>();
 
         //pointB - Set the random direction point of each vertices in up and down arraylists
         ArrayList<ArrayList<Object>> upRandom = new ArrayList<>(99);
         ArrayList<ArrayList<Object>> downRandom = new ArrayList<>(99);
 
-        //Clear the arrayLists from last time
-        up.clear();
-        down.clear();
-        upRandom.clear();
-        downRandom.clear();
+        //Used in processing the connections to be added to connection TGR
+        ArrayList<ArrayList<Object>> connectionsT = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connections = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connectionsT1 = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connectionsT2 = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
+        ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
+
+        //Ensure all connections are made making connection pairs
+        ArrayList<Object> connectionT = new ArrayList<>();
+        ArrayList<Object> connectionG = new ArrayList<>();
+        ArrayList<Object> connectionR = new ArrayList<>();
 
         //Return value
-        ArrayList<ArrayList<Object>> drawRandomMesh = new ArrayList<ArrayList<Object>>();
+        ArrayList<ArrayList<ArrayList<Object>>> drawRandomMesh = new ArrayList<>();
 
         /**
          * Add all the points with their proximities to ArrayList
@@ -185,7 +193,6 @@ public class Mesh extends Interface_Helper {
             }
         }
 
-
         /**
          * We want to sort through the upRandom, downRandom and compare their proximities
          * and decide whether we want to make a connection or not and add them to separate
@@ -193,16 +200,11 @@ public class Mesh extends Interface_Helper {
          * later and drawing the connections, we will be returning the mesh with all the data
          * we need as a large multi-dimensional array.
          */
-        //Ensure all connections are made making connection pairs
-        ArrayList<ArrayList<ArrayList<Object>>> connectionT = new ArrayList<>();
-        ArrayList<ArrayList<ArrayList<Object>>> connectionG = new ArrayList<>();
-        ArrayList<ArrayList<ArrayList<Object>>> connectionR = new ArrayList<>();
 
         //Connect any upRandom and downRandom to each other if they are within the green zone
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 if (upRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    ArrayList<ArrayList<Object>> connections = new ArrayList<>();
                     connections.get(0).add(upRandom.get(o));
                     connections.get(1).add(downRandom.get(p));
                     connectionG.add(connections);
@@ -212,7 +214,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the red zone
                 if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
                     connectionsR.get(0).add(upRandom.get(o));
                     connectionsR.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR);
@@ -222,7 +223,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the touch zone
                 if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsT = new ArrayList<>();
                     connectionsT.get(0).add(upRandom.get(o));
                     connectionsT.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT);
@@ -236,7 +236,6 @@ public class Mesh extends Interface_Helper {
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 if (upRandom.get(o).indexOf(4) == upRandom.get(p).indexOf(0)) {
-                    ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
                     connections1.get(0).add(upRandom.get(o));
                     connections1.get(1).add(upRandom.get(p));
                     connectionG.add(connections1);
@@ -246,7 +245,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the red zone
                 if (upRandom.get(o).indexOf(7) == upRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
                     connectionsR1.get(0).add(upRandom.get(o));
                     connectionsR1.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR1);
@@ -256,7 +254,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the touch zone
                 if (upRandom.get(o).indexOf(2) == upRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsT1 = new ArrayList<>();
                     connectionsT1.get(0).add(upRandom.get(o));
                     connectionsT1.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT1);
@@ -270,7 +267,6 @@ public class Mesh extends Interface_Helper {
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 if (downRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
                     connections2.get(0).add(downRandom.get(o));
                     connections2.get(1).add(downRandom.get(p));
                     connectionG.add(connections2);
@@ -280,7 +276,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the red zone
                 if (downRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
                     connectionsR2.get(0).add(upRandom.get(o));
                     connectionsR2.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR2);
@@ -290,7 +285,6 @@ public class Mesh extends Interface_Helper {
 
                 //How to connect if in the touch zone
                 if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
-                    ArrayList<ArrayList<Object>> connectionsT2 = new ArrayList<>();
                     connectionsT2.get(0).add(upRandom.get(o));
                     connectionsT2.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT2);
@@ -300,9 +294,14 @@ public class Mesh extends Interface_Helper {
             }
         }
 
-        //Draw Edges of each connection to each vertices
+        //Add the three
+        drawRandomMesh.get(0).add(connectionT);
+        drawRandomMesh.get(1).add(connectionG);
+        drawRandomMesh.get(2).add(connectionR);
 
-
+        connectionT.clear();
+        connectionG.clear();
+        connectionR.clear();
         //Return an array of vertices and edges
         return drawRandomMesh;
     }
