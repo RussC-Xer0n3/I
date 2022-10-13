@@ -100,6 +100,43 @@ public class Mesh extends Interface_Helper {
     }
 
     /**
+     * The starting poings along the horizontal line of the screen
+     * for the starting points of the mesh
+     *
+     * @return 2-D ArrayList pointA
+     */
+    protected ArrayList getPointA() {
+        int i;
+
+        //Buffer
+        ArrayList<ArrayList <Object>> equal = new ArrayList<ArrayList <Object>>(equalPoints());
+
+        //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
+        ArrayList<ArrayList<Object>> up = new ArrayList<>();
+        ArrayList<ArrayList<Object>> down = new ArrayList<>();
+
+        //Return 2-d ArrayList
+        ArrayList<ArrayList<Object>> pointA = new ArrayList<>();
+
+        //pointA - Set pointA vertices
+        /**
+         * Separates and extracts a multi-dimensional ArrayList of ArrayLists
+         * [ 0 [], [], []....
+         *   1 [], [], [].... ]
+         * into two separate ArrayLists
+         */
+        for (i = 0; i <= equal.get(i).size(); i++) {
+            //Should be getting index 0 and adding each ith value inside the arraylist same for index 1
+            up.get(i).add(equal.get(0).indexOf(i));
+            down.get(i).add(equal.get(1).indexOf(i));
+        }
+
+        pointA.get(0).add(up);
+        pointA.get(1).add(down);
+
+        return pointA;
+    }
+    /**
      * We want to generate random points and link them to other points to draw the mesh
      * In this instance we will look at MST and Spanning Forests making use of other methods
      * to both draw the vertices and the edge (line) between each vertices representing
@@ -107,19 +144,13 @@ public class Mesh extends Interface_Helper {
      * 200 constantly. Point A int the animation is from the horizontal line and point B
      * the randomised end point of a restricted exploratory algorithm.
      *
-     * @param canvas
      * @return 4-D ArrayList - of vertices and edges in the mesh with their proximities
      */
-    protected ArrayList drawRandomMesh(Canvas canvas) {
-        int i, j, k, m, o, p;
+    protected ArrayList pointB() {
+        int j, k, m, o, p;
 
-        //Buffers
-        ArrayList<ArrayList <Object>> equal = new ArrayList<ArrayList <Object>>(equalPoints());
+        //Buffer
         ArrayList<ArrayList <Object>> proximity_points = new ArrayList<>();
-
-        //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
-        ArrayList<ArrayList<Object>> up = new ArrayList<>();
-        ArrayList<ArrayList<Object>> down = new ArrayList<>();
 
         //pointB - Set the random direction point of each vertices in up and down arraylists
         ArrayList<ArrayList<Object>> upRandom = new ArrayList<>(99);
@@ -142,7 +173,7 @@ public class Mesh extends Interface_Helper {
         ArrayList<Object> connectionR = new ArrayList<>();
 
         //Return value
-        ArrayList<ArrayList<ArrayList<Object>>> drawRandomMesh = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Object>>> pointB = new ArrayList<>();
 
         /**
          * Add all the points with their proximities to ArrayList
@@ -150,19 +181,6 @@ public class Mesh extends Interface_Helper {
          */
         for (m = 0; m <= 1000; m++) {
             proximity_points.add(Proximity.proximity(getRandomAreaPoint()));
-        }
-
-        //pointA - Set pointA vertices
-        /**
-         * Separates and extracts a multi-dimensional ArrayList of ArrayLists
-         * [ 0 [], [], []....
-         *   1 [], [], [].... ]
-         * into two separate ArrayLists
-         */
-        for (i = 0; i <= equal.get(i).size(); i++) {
-            //Should be getting index 0 and adding each ith value inside the arraylist same for index 1
-            up.get(i).add(equal.get(0).indexOf(i));
-            down.get(i).add(equal.get(1).indexOf(i));
         }
 
         //Data processor buffer
@@ -295,14 +313,14 @@ public class Mesh extends Interface_Helper {
         }
 
         //Add the three
-        drawRandomMesh.get(0).add(connectionT);
-        drawRandomMesh.get(1).add(connectionG);
-        drawRandomMesh.get(2).add(connectionR);
+        pointB.get(0).add(connectionT);
+        pointB.get(1).add(connectionG);
+        pointB.get(2).add(connectionR);
 
         connectionT.clear();
         connectionG.clear();
         connectionR.clear();
         //Return an array of vertices and edges
-        return drawRandomMesh;
+        return pointB;
     }
 }
