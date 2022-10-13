@@ -186,7 +186,8 @@ public class Mesh extends Interface_Helper {
         }
 
         //Ensure all connections are made making connection pairs
-        ArrayList<ArrayList<ArrayList<Object>>> connection = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Object>>> connectionG = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Object>>> connectionR = new ArrayList<>();
 
         //Connect any upRandom and downRandom to each other if they are within the green zone
         for (o = 0; o <= 100; o++) {
@@ -195,10 +196,21 @@ public class Mesh extends Interface_Helper {
                     ArrayList<ArrayList<Object>> connections = new ArrayList<>();
                     connections.get(0).add(upRandom.get(o));
                     connections.get(1).add(downRandom.get(p));
-                    connection.add(connections);
+                    connectionG.add(connections);
                     //clear the buffer
                     connections.clear();
                 }
+
+                //How to connect if in the red zone
+                if (upRandom.get(o).indexOf(6) == downRandom.get(p).indexOf(4)) {
+                    ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
+                    connectionsR.get(0).add(upRandom.get(o));
+                    connectionsR.get(1).add(downRandom.get(p));
+                    connectionR.add(connectionsR);
+                    //clear the buffer
+                    connectionsR.clear();
+                }
+
             }
         }
 
@@ -209,9 +221,19 @@ public class Mesh extends Interface_Helper {
                     ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
                     connections1.get(0).add(upRandom.get(o));
                     connections1.get(1).add(upRandom.get(p));
-                    connection.add(connections1);
+                    connectionG.add(connections1);
                     //clear the buffer
                     connections1.clear();
+                }
+
+                //How to connect if in the red zone
+                if (upRandom.get(o).indexOf(6) == upRandom.get(p).indexOf(4)) {
+                    ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
+                    connectionsR1.get(0).add(upRandom.get(o));
+                    connectionsR1.get(1).add(downRandom.get(p));
+                    connectionR.add(connectionsR1);
+                    //clear the buffer
+                    connectionsR1.clear();
                 }
             }
         }
@@ -223,13 +245,26 @@ public class Mesh extends Interface_Helper {
                     ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
                     connections2.get(0).add(downRandom.get(o));
                     connections2.get(1).add(downRandom.get(p));
-                    connection.add(connections2);
+                    connectionG.add(connections2);
                     //clear the buffer
                     connections2.clear();
                 }
+
+                //How to connect if in the red zone
+                if (downRandom.get(o).indexOf(6) == downRandom.get(p).indexOf(4)) {
+                    ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
+                    connectionsR2.get(0).add(upRandom.get(o));
+                    connectionsR2.get(1).add(downRandom.get(p));
+                    connectionR.add(connectionsR2);
+                    //clear the buffer
+                    connectionsR2.clear();
+                }
             }
         }
-            //Draw Edges of each connection to each vertices
+
+        //Draw Edges of each connection to each vertices
+
+
         //Return an array of vertices and edges
         return drawRandomMesh;
     }
