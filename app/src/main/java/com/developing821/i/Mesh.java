@@ -194,9 +194,9 @@ public class Mesh extends Interface_Helper {
          * we need as a large multi-dimensional array.
          */
         //Ensure all connections are made making connection pairs
+        ArrayList<ArrayList<ArrayList<Object>>> connectionT = new ArrayList<>();
         ArrayList<ArrayList<ArrayList<Object>>> connectionG = new ArrayList<>();
         ArrayList<ArrayList<ArrayList<Object>>> connectionR = new ArrayList<>();
-        ArrayList<ArrayList<ArrayList<Object>>> connectionT = new ArrayList<>();
 
         //Connect any upRandom and downRandom to each other if they are within the green zone
         for (o = 0; o <= 100; o++) {
@@ -245,7 +245,7 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (upRandom.get(o).indexOf(7) >= upRandom.get(p).indexOf(4)) {
+                if (upRandom.get(o).indexOf(7) == upRandom.get(p).indexOf(4)) {
                     ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
                     connectionsR1.get(0).add(upRandom.get(o));
                     connectionsR1.get(1).add(downRandom.get(p));
@@ -279,7 +279,7 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (downRandom.get(o).indexOf(7) >= downRandom.get(p).indexOf(4)) {
+                if (downRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(4)) {
                     ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
                     connectionsR2.get(0).add(upRandom.get(o));
                     connectionsR2.get(1).add(downRandom.get(p));
@@ -307,4 +307,3 @@ public class Mesh extends Interface_Helper {
         return drawRandomMesh;
     }
 }
-
