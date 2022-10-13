@@ -80,7 +80,7 @@ public class Proximity extends Mesh {
      * @return ArrayList proximity - the x,y and the areas and circumferences
      */
     public static ArrayList proximity(ArrayList point) {
-        ArrayList<ArrayList<Object> > proximity = new ArrayList<ArrayList<Object> >();
+        ArrayList<ArrayList<Object> > proximity = new ArrayList<>();
 
         proximity.get(0).add(point);
         proximity.get(1).add(Touch(pi, _touch_radius));
