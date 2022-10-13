@@ -105,7 +105,7 @@ public class Mesh extends Interface_Helper {
      *
      * @return 2-D ArrayList pointA
      */
-    protected ArrayList getPointA() {
+    protected ArrayList pointA() {
         int i;
 
         //Buffer
