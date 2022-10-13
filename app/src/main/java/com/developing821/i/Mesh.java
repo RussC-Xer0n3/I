@@ -119,7 +119,7 @@ public class Mesh extends Interface_Helper {
         ArrayList drawRandomMesh = new ArrayList();
         ArrayList proximity_points = new ArrayList();
 
-        //pointA - get the first and second index of the 2 dimensional array
+        //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
         ArrayList<ArrayList<Object>> up = new ArrayList<ArrayList <Object> >();
         ArrayList<ArrayList<Object>> down = new ArrayList<ArrayList <Object> >();
 
@@ -143,7 +143,7 @@ public class Mesh extends Interface_Helper {
 
         //pointA - Set pointA vertices
         /**
-         * Separates a multi-dimensional ArrayList of ArrayLists
+         * Separates and extracts a multi-dimensional ArrayList of ArrayLists
          * [ 0 [], [], []....
          *   1 [], [], [].... ]
          * into two separate ArrayLists
