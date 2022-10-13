@@ -185,9 +185,18 @@ public class Mesh extends Interface_Helper {
             }
         }
 
+
+        /**
+         * We want to sort through the upRandom, downRandom and compare their proximities
+         * and decide whether we want to make a connection or not and add them to separate
+         * arraylists, one for each type of connection according to the proximity for processing
+         * later and drawing the connections, we will be returning the mesh with all the data
+         * we need as a large multi-dimensional array.
+         */
         //Ensure all connections are made making connection pairs
         ArrayList<ArrayList<ArrayList<Object>>> connectionG = new ArrayList<>();
         ArrayList<ArrayList<ArrayList<Object>>> connectionR = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Object>>> connectionT = new ArrayList<>();
 
         //Connect any upRandom and downRandom to each other if they are within the green zone
         for (o = 0; o <= 100; o++) {
@@ -202,7 +211,7 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (upRandom.get(o).indexOf(6) == downRandom.get(p).indexOf(4)) {
+                if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(4)) {
                     ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
                     connectionsR.get(0).add(upRandom.get(o));
                     connectionsR.get(1).add(downRandom.get(p));
@@ -211,6 +220,15 @@ public class Mesh extends Interface_Helper {
                     connectionsR.clear();
                 }
 
+                //How to connect if in the touch zone
+                if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
+                    ArrayList<ArrayList<Object>> connectionsT = new ArrayList<>();
+                    connectionsT.get(0).add(upRandom.get(o));
+                    connectionsT.get(1).add(downRandom.get(p));
+                    connectionT.add(connectionsT);
+                    //clear the buffer
+                    connectionsT.clear();
+                }
             }
         }
 
@@ -227,13 +245,23 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (upRandom.get(o).indexOf(6) == upRandom.get(p).indexOf(4)) {
+                if (upRandom.get(o).indexOf(7) >= upRandom.get(p).indexOf(4)) {
                     ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
                     connectionsR1.get(0).add(upRandom.get(o));
                     connectionsR1.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR1);
                     //clear the buffer
                     connectionsR1.clear();
+                }
+
+                //How to connect if in the touch zone
+                if (upRandom.get(o).indexOf(2) == upRandom.get(p).indexOf(2)) {
+                    ArrayList<ArrayList<Object>> connectionsT1 = new ArrayList<>();
+                    connectionsT1.get(0).add(upRandom.get(o));
+                    connectionsT1.get(1).add(downRandom.get(p));
+                    connectionT.add(connectionsT1);
+                    //clear the buffer
+                    connectionsT1.clear();
                 }
             }
         }
@@ -251,13 +279,23 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (downRandom.get(o).indexOf(6) == downRandom.get(p).indexOf(4)) {
+                if (downRandom.get(o).indexOf(7) >= downRandom.get(p).indexOf(4)) {
                     ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
                     connectionsR2.get(0).add(upRandom.get(o));
                     connectionsR2.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR2);
                     //clear the buffer
                     connectionsR2.clear();
+                }
+
+                //How to connect if in the touch zone
+                if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
+                    ArrayList<ArrayList<Object>> connectionsT2 = new ArrayList<>();
+                    connectionsT2.get(0).add(upRandom.get(o));
+                    connectionsT2.get(1).add(downRandom.get(p));
+                    connectionT.add(connectionsT2);
+                    //clear the buffer
+                    connectionsT2.clear();
                 }
             }
         }
