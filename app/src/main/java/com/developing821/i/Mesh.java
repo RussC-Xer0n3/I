@@ -211,7 +211,7 @@ public class Mesh extends Interface_Helper {
                 }
 
                 //How to connect if in the red zone
-                if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(4)) {
+                if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
                     ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
                     connectionsR.get(0).add(upRandom.get(o));
                     connectionsR.get(1).add(downRandom.get(p));
