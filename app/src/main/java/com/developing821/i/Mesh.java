@@ -185,13 +185,48 @@ public class Mesh extends Interface_Helper {
             }
         }
 
-        //Ensure all connections are made
-        ArrayList connection = new ArrayList();
+        //Ensure all connections are made making connection pairs
+        ArrayList<ArrayList<ArrayList<Object>>> connection = new ArrayList<>();
 
-        for (o = 0; o <= upRandom.size() && o <= downRandom.size(); o++) {
+        //Connect any upRandom and downRandom to each other if they are within the green zone
+        for (o = 0; o <= 100; o++) {
+            for (p = 0; p <= 100; p++) {
+                if (upRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
+                    ArrayList<ArrayList<Object>> connections = new ArrayList<>();
+                    connections.get(0).add(upRandom.get(o));
+                    connections.get(1).add(downRandom.get(p));
+                    connection.add(connections);
+                    //clear the buffer
+                    connections.clear();
+                }
+            }
+        }
 
-            for (p = 0; p <= upRandom.lastIndexOf(o) && p <= downRandom.lastIndexOf(o); p++) {
-                if (upRandom.get().indexOf(4));
+        //Connect any upRandom and upRandom to each other if they are within the green zone
+        for (o = 0; o <= 100; o++) {
+            for (p = 0; p <= 100; p++) {
+                if (upRandom.get(o).indexOf(4) == upRandom.get(p).indexOf(0)) {
+                    ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
+                    connections1.get(0).add(upRandom.get(o));
+                    connections1.get(1).add(upRandom.get(p));
+                    connection.add(connections1);
+                    //clear the buffer
+                    connections1.clear();
+                }
+            }
+        }
+
+        //Connect any downRandom and downRandom to each other if they are within the green zone
+        for (o = 0; o <= 100; o++) {
+            for (p = 0; p <= 100; p++) {
+                if (downRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
+                    ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
+                    connections2.get(0).add(downRandom.get(o));
+                    connections2.get(1).add(downRandom.get(p));
+                    connection.add(connections2);
+                    //clear the buffer
+                    connections2.clear();
+                }
             }
         }
             //Draw Edges of each connection to each vertices
