@@ -115,9 +115,9 @@ public class Mesh extends Interface_Helper {
     protected ArrayList drawRandomMesh(Canvas canvas) {
         int i, j, k, m, o, p;
 
-        ArrayList<ArrayList <Object> > equal = new ArrayList<ArrayList <Object> >(equalPoints());
-        ArrayList drawRandomMesh = new ArrayList();
-        ArrayList proximity_points = new ArrayList();
+        //Buffers
+        ArrayList<ArrayList <Object>> equal = new ArrayList<ArrayList <Object>>(equalPoints());
+        ArrayList<ArrayList <Object>> proximity_points = new ArrayList<ArrayList <Object>>();
 
         //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
         ArrayList<ArrayList<Object>> up = new ArrayList<ArrayList <Object> >();
@@ -132,6 +132,9 @@ public class Mesh extends Interface_Helper {
         down.clear();
         upRandom.clear();
         downRandom.clear();
+
+        //Return value
+        ArrayList<ArrayList<Object>> drawRandomMesh = new ArrayList<ArrayList<Object>>();
 
         /**
          * Add all the points with their proximities to ArrayList
@@ -148,15 +151,16 @@ public class Mesh extends Interface_Helper {
          *   1 [], [], [].... ]
          * into two separate ArrayLists
          */
-        for (i = 0; i <= equal.size(); i++) {
-            up.get(i).add(equal.get(0));
-            down.get(i).add(equal.get(1));
+        for (i = 0; i <= equal.get(i).size(); i++) {
+            //Should be getting index 0 and adding each ith value inside the arraylist same for index 1
+            up.get(i).add(equal.get(0).indexOf(i));
+            down.get(i).add(equal.get(1).indexOf(i));
         }
 
         //Data processor buffer
         ArrayList n = new ArrayList();
 
-        //pointB - Randomise x and y to get pointB vertices
+        //pointB - Randomise x and y to get pointB vertices and sort them into top and bottom of screen
         for (j = 0; j <= proximity_points.size(); j++) {
 
             n.add(proximity_points.get(j));
@@ -168,11 +172,12 @@ public class Mesh extends Interface_Helper {
 
                 //if top and upRandom doesn't contain it, add it else add it to downRandom if not top
                 if (top == true && upRandom.get(99) == null) {
-                    if (!upRandom.contains(proximity_points.get(k))) {
+                    //Adds to the randomness because we then have variable heights from the 1000 samples
+                    if (!upRandom.contains(proximity_points.get(k).indexOf(0))) {
                         upRandom.add((ArrayList<Object>) proximity_points.get(j));
                     }
                 } else if (top == false && downRandom.get(99) == null) {
-                    if (!downRandom.contains(proximity_points.get(k))) {
+                    if (!downRandom.contains(proximity_points.get(k).indexOf(0))) {
                         downRandom.add((ArrayList<Object>) proximity_points.get(j));
                     }
                 }
@@ -183,11 +188,10 @@ public class Mesh extends Interface_Helper {
         //Ensure all connections are made
         ArrayList connection = new ArrayList();
 
-
         for (o = 0; o <= upRandom.size() && o <= downRandom.size(); o++) {
 
             for (p = 0; p <= upRandom.lastIndexOf(o) && p <= downRandom.lastIndexOf(o); p++) {
-
+                if (upRandom.get().indexOf(4));
             }
         }
             //Draw Edges of each connection to each vertices
