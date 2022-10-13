@@ -6,8 +6,6 @@ import android.util.TypedValue;
 
 import java.util.ArrayList;
 
-//https://en.wikipedia.org/wiki/Pi - 12/10/2022
-
 /**
  * The class is intended to simply calculate and return radial points
  * to be used as proximities for each point.

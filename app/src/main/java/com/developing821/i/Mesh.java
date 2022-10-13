@@ -79,20 +79,18 @@ public class Mesh extends Interface_Helper {
 
     protected static ArrayList equalPoints() {
         final int _N = 200;
-        int i, j;
+        int i;
 
         ArrayList<ArrayList <Object> > halfwayLinePoints = new ArrayList<ArrayList <Object> >(halfHorizontalPoints(_N));
         ArrayList<ArrayList <Object> > up = new ArrayList<ArrayList <Object> >();
         ArrayList<ArrayList <Object> > down = new ArrayList<ArrayList <Object> >();
 
-        up.get(0).add(halfwayLinePoints.get(0));
         //Equally divide the the vertices on the horizontal line with alternation
         for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
-            //Return an array of endpoints vertices going up
-            up.get(i).add(halfwayLinePoints.get(i + 2));
-            for (j = i; ; j++) {
-                //Return an array of endpoints vertices going down
-                down.get(j).add(halfwayLinePoints.get(j + 1));
+            if (i % 2 == 0) {
+                up.get(i).add(halfwayLinePoints.get(i));
+            } else {
+                down.get(i).add(halfwayLinePoints.get(i));
             }
         }
 
@@ -168,7 +166,7 @@ public class Mesh extends Interface_Helper {
                 // ? Top half of screen ?
                 boolean top = isTop((ArrayList) n.get(k));
 
-                //if top and upRandom does't contain it, add it else add it to downRandom if not top
+                //if top and upRandom doesn't contain it, add it else add it to downRandom if not top
                 if (top == true && upRandom.get(99) == null) {
                     if (!upRandom.contains(proximity_points.get(k))) {
                         upRandom.add((ArrayList<Object>) proximity_points.get(j));
