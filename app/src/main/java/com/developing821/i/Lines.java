@@ -57,34 +57,23 @@ public class Lines {
     }
 
     /**
-     * Cycles through with a (N(log(log(N))) for loop to calculate and add all
+     * Cycles through with a O(n) for loop to calculate and add all
      * coordinate pairs to an arraylist along the central horizontal line
      *
      * @return halfHorizontal - all points as pair values as a single arraylist
      */
     protected static ArrayList halfHorizontal() {
-        int x1, x2, y1, y2, i, j, k, l;
+        int w, l, k;
 
         ArrayList<ArrayList<Object>> halfHorizontal = new ArrayList<>();
 
-        x1 = getHalfHeight();
-        x2 = getScreenWidth();
-        y1 = getHalfHeight();
-        y2 = getHalfHeight();
-
-        for (l = 0; l <= x2; l++) {
-            //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
-            for (i = y1; i <= y2; i++) {
-                //set half the height as 0 and then any point at half way up as x2
-                for (j = i; j == x2; j++) {
-                    //enforce x1 and y1 to stay at 0 and set the points on the halfway as pairs
-                    for (k = l;; k++) {
-                        //Call to screenPointPair to add to out arraylist as points on the line
-                        halfHorizontal.get(l).add(screenPointPair(k, i));
-                    }
-                }
+        //set value half the height, iterate
+        for (l = getHalfHeight(); l <= getScreenWidth(); l++) {
+                k = l * getHalfHeight();
+                //enforce x1 and y1 to stay at 0 and set the points on the halfway as a multiple to get the nth halfway
+                //Call to screenPointPair to add to out arraylist as points on the line
+                halfHorizontal.get(l).add(screenPointPair(l, k));
             }
-        }
         return halfHorizontal;
     }
 
