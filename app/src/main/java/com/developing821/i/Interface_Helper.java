@@ -67,11 +67,11 @@ public class Interface_Helper {
         } else if (x > getScreenWidth()) {
             Crashed.outOfBounds();
         } else if (x >= 0 && x <= getScreenWidth()) {
-            x = x;
+            return x;
         } else if (x == getScreenWidth()) {
-            x = x;
+            return x;
         } else {
-            x = x;
+            return x;
         }
         return x;
     }
@@ -176,7 +176,7 @@ public class Interface_Helper {
         for (i = 0; i <= 1; i++){
             switch (i) {
                 case 0:
-                    if ((int) pair.get(0) >= getHalfHeight()) {
+                    if ((int) pair.get(1) >= getHalfHeight()) {
                         top = true;
                     } else {
                         top = false;

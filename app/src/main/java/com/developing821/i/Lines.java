@@ -26,15 +26,7 @@ public class Lines {
      * @param pairB
      */
     protected void drawLine(Canvas canvas, ArrayList pairA, ArrayList pairB) {
-        int x1, x2, y1, y2;
-
-        x1 = getScreenPointPair_X(pairA);
-        y1 = getScreenPointPair_Y(pairA);
-
-        x2 = getScreenPointPair_X(pairB);
-        y2 = getScreenPointPair_Y(pairB);
-
-        canvas.drawLine(x1, y1, x2, y2, paint);
+        canvas.drawLine(pairA.indexOf(0), pairA.indexOf(1), pairB.indexOf(0), pairB.indexOf(1), paint);
     }
 
     /**
@@ -47,13 +39,21 @@ public class Lines {
         int x1, x2, y1, y2;
 
         x1 = getHalfHeight();
-        x2 = getHalfHeight();
+        x2 = getHalfWidth();
         y1 = getHalfHeight();
-        y2 = getScreenWidth();
-
+        y2 = getHalfHeight();
         //https://stackoverflow.com/questions/3616676/how-to-draw-a-line-in-android
         paint.setStrokeWidth(1f);
-        canvas.drawLine(x1, y1, x2, y2, paint);
+
+        ArrayList pairA = new ArrayList();
+        ArrayList pairB = new ArrayList();
+
+        pairA.add(x1);
+        pairA.add(y1);
+        pairB.add(x2);
+        pairB.add(y2);
+
+        drawLine(canvas, pairA, pairB);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Lines {
     protected static ArrayList halfHorizontal() {
         int x1, x2, y1, y2, i, j, k, l;
 
-        ArrayList<ArrayList<Object> > halfHorizontal = new ArrayList<ArrayList<Object> >();
+        ArrayList<ArrayList<Object>> halfHorizontal = new ArrayList<>();
 
         x1 = getHalfHeight();
         x2 = getHalfHeight();
