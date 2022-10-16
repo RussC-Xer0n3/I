@@ -75,6 +75,12 @@ public class Mesh extends Interface_Helper {
         return surfacePoints;
     }
 
+    /**
+     * Returns an Object ArrayList of vertices of equal distribution along a horizontal line
+     * halfway across the screen, the ArrayList contains two other ArrayLists of equal size (100 objects)
+     * one half above the halfway line, the other below
+     * @return
+     */
     protected static ArrayList equalPoints() {
         final int _N = 200;
         int i;
