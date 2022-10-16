@@ -28,7 +28,7 @@ public class Mesh extends Interface_Helper {
      * @return ArrayList pair of x,y Coordinates
      */
     public static ArrayList getRandomAreaPoint() {
-        int i, j, s, k;
+        int s, k;
         ArrayList<ArrayList <Integer> > areaPairs = new ArrayList<ArrayList <Integer>>(surfacePairs());
         ArrayList<ArrayList <Object> > randomAreaPoint = new ArrayList<>();
 
