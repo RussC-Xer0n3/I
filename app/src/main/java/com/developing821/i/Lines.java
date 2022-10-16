@@ -39,7 +39,7 @@ public class Lines {
         int x1, x2, y1, y2;
 
         x1 = getHalfHeight();
-        x2 = getHalfWidth();
+        x2 = getScreenWidth();
         y1 = getHalfHeight();
         y2 = getHalfHeight();
         //https://stackoverflow.com/questions/3616676/how-to-draw-a-line-in-android
@@ -68,9 +68,9 @@ public class Lines {
         ArrayList<ArrayList<Object>> halfHorizontal = new ArrayList<>();
 
         x1 = getHalfHeight();
-        x2 = getHalfHeight();
+        x2 = getScreenWidth();
         y1 = getHalfHeight();
-        y2 = getScreenWidth();
+        y2 = getHalfHeight();
 
         for (l = 0; l <= getScreenWidth(); l++) {
             //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
