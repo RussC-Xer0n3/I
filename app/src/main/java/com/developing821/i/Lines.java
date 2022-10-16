@@ -63,7 +63,7 @@ public class Lines {
      * @return halfHorizontal - all points as pair values as a single arraylist
      */
     protected static ArrayList halfHorizontal() {
-        int w, l, k;
+        int l, k;
 
         ArrayList<ArrayList<Object>> halfHorizontal = new ArrayList<>();
 
@@ -72,8 +72,8 @@ public class Lines {
                 k = l * getHalfHeight();
                 //enforce x1 and y1 to stay at 0 and set the points on the halfway as a multiple to get the nth halfway
                 //Call to screenPointPair to add to out arraylist as points on the line
-                halfHorizontal.get(l).add(screenPointPair(l, k));
-            }
+                halfHorizontal.add(screenPointPair(k, l));
+        }
         return halfHorizontal;
     }
 
@@ -85,7 +85,6 @@ public class Lines {
      */
     protected static ArrayList halfHorizontalPoints(int n) {
         int s, i, k;
-        Object j;
         s = getScreenWidth() / n;
 
         ArrayList<ArrayList<ArrayList<Object> > > points = new ArrayList<>(halfHorizontal());
@@ -96,10 +95,8 @@ public class Lines {
             //Step through at intervals of width / 200 for the entirety of k (200 points)
             for (i = s; i <= n; i++) {
                 //for the object of j get the value at ith index of points
-                for (j = points.get(i); ; ) {
-                    //add it to a new ArrayList
-                    horizontalPoints.get(k).add(j);
-                }
+                //add it to a new ArrayList
+                horizontalPoints.get(k).add(points.get(i));
             }
         }
         return horizontalPoints;
