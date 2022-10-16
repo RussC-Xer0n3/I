@@ -72,15 +72,15 @@ public class Lines {
         y1 = getHalfHeight();
         y2 = getHalfHeight();
 
-        for (l = 0; l <= getScreenWidth(); l++) {
+        for (l = 0; l <= x2; l++) {
             //O(Log(Log(n))set value 0 as y1 and any point along the width between x1 and x2 as y2
             for (i = y1; i <= y2; i++) {
                 //set half the height as 0 and then any point at half way up as x2
                 for (j = i; j == x2; j++) {
                     //enforce x1 and y1 to stay at 0 and set the points on the halfway as pairs
-                    for (k = y1; k == x1 + y1; k++) {
+                    for (k = l;; k++) {
                         //Call to screenPointPair to add to out arraylist as points on the line
-                        halfHorizontal.get(l).add(screenPointPair(k, j));
+                        halfHorizontal.get(l).add(screenPointPair(k, i));
                     }
                 }
             }
@@ -99,8 +99,8 @@ public class Lines {
         Object j;
         s = getScreenWidth() / n;
 
-        ArrayList<ArrayList<ArrayList<Object> > > points = new ArrayList<ArrayList<ArrayList<Object> > >(halfHorizontal());
-        ArrayList<ArrayList<Object> > horizontalPoints = new ArrayList<ArrayList<Object> >();
+        ArrayList<ArrayList<ArrayList<Object> > > points = new ArrayList<>(halfHorizontal());
+        ArrayList<ArrayList<Object> > horizontalPoints = new ArrayList<>();
 
         //for the quantity n (200)
         for (k = 0; k <= n; k++) {
