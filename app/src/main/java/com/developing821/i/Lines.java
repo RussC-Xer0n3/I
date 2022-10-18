@@ -1,7 +1,9 @@
 package com.developing821.i;
 
+import static android.graphics.Shader.TileMode.DECAL;
 import static com.developing821.i.Interface_Helper.getHalfHeight;
 import static com.developing821.i.Interface_Helper.getHalfWidth;
+import static com.developing821.i.Interface_Helper.getScreenCentre;
 import static com.developing821.i.Interface_Helper.getScreenPointPair_X;
 import static com.developing821.i.Interface_Helper.getScreenPointPair_Y;
 import static com.developing821.i.Interface_Helper.getScreenWidth;
@@ -9,6 +11,8 @@ import static com.developing821.i.Interface_Helper.screenPointPair;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,7 +29,13 @@ public class Lines {
      * @param pairA
      * @param pairB
      */
+
+    //TODO: RANDOMISE COLORS
+    @RequiresApi(api = Build.VERSION_CODES.S)
     protected void drawLine(Canvas canvas, ArrayList pairA, ArrayList pairB) {
+        long[] a = ColourGen.gen();
+
+        paint.setColor(new RadialGradient((float) pairA.indexOf(0), (float) pairA.indexOf(1), (float) pairA.indexOf(0), (float) pairB.indexOf(0), (float) pairB.indexOf(1), (float) getScreenCentre(), a, null, DECAL));
         canvas.drawLine(pairA.indexOf(0), pairA.indexOf(1), pairB.indexOf(0), pairB.indexOf(1), paint);
     }
 
@@ -53,7 +63,9 @@ public class Lines {
         pairB.add(x2);
         pairB.add(y2);
 
-        drawLine(canvas, pairA, pairB);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            drawLine(canvas, pairA, pairB);
+        }
     }
 
     /**

@@ -51,25 +51,28 @@ public class Proximity extends Mesh {
 
     /**
      * The touch area we want to use in dp minimum 48dp (icon size)
-     * @return null, just process
+     * @return
      */
-    public static Object Touch(int pi, int _touch_radius) { Area(pi, _touch_radius);
+    public static Object Touch(int pi, int _touch_radius) {
+        Area(pi, _touch_radius);
         return null;
     }
 
     /**
      * The 'green zone' area we want to use in dp minimum 96dp (icon size)
-     * @return null, just process
+     * @return
      */
-    public static Object Green(int pi, int _green_radius) { Area(pi, _green_radius);
+    public static Object Green(int pi, int _green_radius) {
+        Area(pi, _green_radius);
         return null;
     }
 
     /**
      * The 'red zone' area we want to use in dp minimum 200dp (icon size)
-     * @return null, just process
+     * @return
      */
-    public static Object Red(int pi, int _red_radius) { Area(pi, _red_radius);
+    public static Object Red(int pi, int _red_radius) {
+        Area(pi, _red_radius);
         return null;
     }
 

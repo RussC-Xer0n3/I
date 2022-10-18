@@ -83,11 +83,11 @@ public class Interface_Helper {
         } else if (y > getScreenHeight()){
             Crashed.outOfBounds();
         } else if (y >= 0 && y <= getScreenHeight()) {
-            y = y;
+            return y;
         } else if (y == getScreenHeight()) {
-            y = y;
+            return y;
         } else {
-            y = y;
+            return y;
         }
         return y;
     }

@@ -2,13 +2,17 @@ package com.developing821.i;
 
 import static android.graphics.Shader.TileMode.DECAL;
 
+import static com.developing821.i.Proximity.proximity;
+
 import android.graphics.Shader;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @RequiresApi(api = Build.VERSION_CODES.S)
 public class RadialGradient extends Shader {
-
     TileMode tileMode = DECAL;
     float[] stops = null;
 
@@ -16,7 +20,7 @@ public class RadialGradient extends Shader {
      * Simply set the colour gradient based on the periferals
      * @param startX
      * @param startY
-     * @param startRadius -
+     * @param startRadius
      * @param endX
      * @param endY
      * @param endRadius
@@ -27,5 +31,4 @@ public class RadialGradient extends Shader {
     public RadialGradient(float startX, float startY, float startRadius, float endX, float endY, float endRadius, long[] colors, float[] stops, TileMode tileMode) {
         return;
     }
-
 }
