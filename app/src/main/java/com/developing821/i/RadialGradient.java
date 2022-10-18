@@ -24,7 +24,7 @@ public class RadialGradient extends Shader {
      * @param endX
      * @param endY
      * @param endRadius
-     * @param colors - int: The sRGB colors to be distributed between the center and edge of the circle This value cannot be null.
+     * @param colors - The sRGB colors to be distributed between the center and edge of the circle the value cannot be null.
      * @param stops - float: May be null. Valid values are between 0.0f and 1.0f. The relative position of each corresponding color in the colors array. If null, colors are distributed evenly between the center and edge of the circle.
      * @param tileMode - Shader.TileMode: The Shader tiling mode This value cannot be null. - https://developer.android.com/reference/android/graphics/Shader.TileMode - DECAL
      */

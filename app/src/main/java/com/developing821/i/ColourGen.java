@@ -12,15 +12,18 @@ public class ColourGen {
         int max = 105;
         int min = 150;
         Random rand = new Random(max);
-        Integer colour;
+        long[] colour = new long[0];
         int sum1, sum2, sum3;
 
 
-        sum1 = min + rand.nextInt();
-        sum2 = min + rand.nextInt();
-        sum3 = min + rand.nextInt();
+        for (int i = 0; i < 2; i++) {
+            sum1 = min + rand.nextInt();
+            sum2 = min + rand.nextInt();
+            sum3 = min + rand.nextInt();
 
-        colour = Integer.valueOf(String.valueOf(sum1) + String.valueOf(sum2) + String.valueOf(sum3));
-        return new long[]{Long.valueOf(colour)};
+            colour[i] = Long.valueOf(String.valueOf(sum1) + String.valueOf(sum2) + String.valueOf(sum3));
+        }
+
+        return colour;
     }
 }

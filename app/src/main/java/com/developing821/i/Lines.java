@@ -10,7 +10,9 @@ import static com.developing821.i.Interface_Helper.getScreenWidth;
 import static com.developing821.i.Interface_Helper.screenPointPair;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
@@ -29,13 +31,14 @@ public class Lines {
      * @param pairA
      * @param pairB
      */
-
-    //TODO: RANDOMISE COLORS
     @RequiresApi(api = Build.VERSION_CODES.S)
     protected void drawLine(Canvas canvas, ArrayList pairA, ArrayList pairB) {
-        long[] a = ColourGen.gen();
 
-        paint.setColor(new RadialGradient((float) pairA.indexOf(0), (float) pairA.indexOf(1), (float) pairA.indexOf(0), (float) pairB.indexOf(0), (float) pairB.indexOf(1), (float) getScreenCentre(), a, null, DECAL));
+//        long[] a = ColourGen.gen();
+//        RadialGradient radial = new RadialGradient((float) pairA.indexOf(0), (float) pairA.indexOf(1), (float) pairA.indexOf(0), (float) pairB.indexOf(0), (float) pairB.indexOf(1), (float) getScreenCentre(), a, null, DECAL);
+//        Problem is paint will not accept the RadialGradient
+
+        paint.setColor(Color.DKGRAY);
         canvas.drawLine(pairA.indexOf(0), pairA.indexOf(1), pairB.indexOf(0), pairB.indexOf(1), paint);
     }
 
