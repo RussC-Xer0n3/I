@@ -225,18 +225,10 @@ public class Mesh extends Interface_Helper {
          * we need as a large multi-dimensional array.
          */
 
-        //Connect any upRandom and downRandom to each other if they are within the green zone
+        //Connect any upRandom and downRandom to each other according to zone
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
-                if (upRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    connections.get(0).add(upRandom.get(o));
-                    connections.get(1).add(downRandom.get(p));
-                    connectionG.add(connections);
-                    //clear the buffer
-                    connections.clear();
-                }
-
-                //How to connect if in the red zone
+                //How to connect if in the Red zone
                 if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
                     connectionsR.get(0).add(upRandom.get(o));
                     connectionsR.get(1).add(downRandom.get(p));
@@ -245,20 +237,36 @@ public class Mesh extends Interface_Helper {
                     connectionsR.clear();
                 }
 
+                //How to connect if in the Green zone
+                if (upRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
+                    connections.get(0).add(upRandom.get(o));
+                    connections.get(1).add(downRandom.get(p));
+                    connectionG.add(connections);
+                    connections.clear();
+                }
+
                 //How to connect if in the touch zone
                 if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
                     connectionsT.get(0).add(upRandom.get(o));
                     connectionsT.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT);
-                    //clear the buffer
                     connectionsT.clear();
                 }
             }
         }
 
-        //Connect any upRandom and upRandom to each other if they are within the green zone
+        //Connect any upRandom and upRandom to each other according to zone
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
+                //How to connect if in the Red zone
+                if (upRandom.get(o).indexOf(7) == upRandom.get(p).indexOf(2)) {
+                    connectionsR1.get(0).add(upRandom.get(o));
+                    connectionsR1.get(1).add(downRandom.get(p));
+                    connectionR.add(connectionsR1);
+                    connectionsR1.clear();
+                }
+
+                //How to connect if in the Green zone
                 if (upRandom.get(o).indexOf(4) == upRandom.get(p).indexOf(0)) {
                     connections1.get(0).add(upRandom.get(o));
                     connections1.get(1).add(upRandom.get(p));
@@ -267,44 +275,33 @@ public class Mesh extends Interface_Helper {
                     connections1.clear();
                 }
 
-                //How to connect if in the red zone
-                if (upRandom.get(o).indexOf(7) == upRandom.get(p).indexOf(2)) {
-                    connectionsR1.get(0).add(upRandom.get(o));
-                    connectionsR1.get(1).add(downRandom.get(p));
-                    connectionR.add(connectionsR1);
-                    //clear the buffer
-                    connectionsR1.clear();
-                }
-
                 //How to connect if in the touch zone
                 if (upRandom.get(o).indexOf(2) == upRandom.get(p).indexOf(2)) {
                     connectionsT1.get(0).add(upRandom.get(o));
                     connectionsT1.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT1);
-                    //clear the buffer
                     connectionsT1.clear();
                 }
             }
         }
 
-        //Connect any downRandom and downRandom to each other if they are within the green zone
+        //Connect any downRandom and downRandom to each other according ot zone
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
-                if (downRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    connections2.get(0).add(downRandom.get(o));
-                    connections2.get(1).add(downRandom.get(p));
-                    connectionG.add(connections2);
-                    //clear the buffer
-                    connections2.clear();
-                }
-
-                //How to connect if in the red zone
+                //How to connect if in the Red zone
                 if (downRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
                     connectionsR2.get(0).add(upRandom.get(o));
                     connectionsR2.get(1).add(downRandom.get(p));
                     connectionR.add(connectionsR2);
-                    //clear the buffer
                     connectionsR2.clear();
+                }
+
+                //How to connect if in the Green zone
+                if (downRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
+                    connections2.get(0).add(downRandom.get(o));
+                    connections2.get(1).add(downRandom.get(p));
+                    connectionG.add(connections2);
+                    connections2.clear();
                 }
 
                 //How to connect if in the touch zone
@@ -312,7 +309,6 @@ public class Mesh extends Interface_Helper {
                     connectionsT2.get(0).add(upRandom.get(o));
                     connectionsT2.get(1).add(downRandom.get(p));
                     connectionT.add(connectionsT2);
-                    //clear the buffer
                     connectionsT2.clear();
                 }
             }

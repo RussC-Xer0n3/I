@@ -3,15 +3,28 @@ package com.developing821.i;
 import java.util.Random;
 
 public class Colours {
-    int max;
-    int min = 150;
-    String colours;
-    Random colour = new Random(105);
+    /**
+     * Randomly generate an sRGB value in long format using starting point of 150
+     * for pastel colours.
+     *
+     * For use with RadialGradient
+     * 
+     * @return long - colour
+     */
+    public static long[] gen () {
+        int max = 105;
+        int min = 150;
+        Random rand = new Random(max);
+        long[] colours = new long[0];
+        int sum1, sum2, sum3;
 
-    for(int o = 0; o < 3; o++) {
-        max = colour.nextInt();
-        colours = (min + max).toString();
+        for (int i = 0; i < 2; i++) {
+            sum1 = min + rand.nextInt();
+            sum2 = min + rand.nextInt();
+            sum3 = min + rand.nextInt();
+            colours[i] = Long.valueOf(String.valueOf(sum1) + String.valueOf(sum2) + String.valueOf(sum3));
+        }
+
+        return colours;
     }
-
-    (long) color = "colours," + "colours," + "colours";
 }
