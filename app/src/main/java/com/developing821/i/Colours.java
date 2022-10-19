@@ -8,7 +8,7 @@ public class Colours {
      * for pastel colours.
      *
      * For use with RadialGradient
-     * 
+     *
      * @return long - colour
      */
     public static long[] gen () {
