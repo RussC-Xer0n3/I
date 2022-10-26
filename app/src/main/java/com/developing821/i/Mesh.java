@@ -54,7 +54,7 @@ public class Mesh extends Interface_Helper {
      */
     protected static ArrayList surfacePairs() {
         int x1, x2, y1, y2, i, j, k;
-        int n = getScreenHeight() * getScreenWidth();
+        int n = getScreenArea();
         ArrayList<ArrayList <Object> > surfacePoints = new ArrayList<>();
 
         x1 = 0;
