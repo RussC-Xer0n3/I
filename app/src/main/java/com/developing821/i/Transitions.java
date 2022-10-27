@@ -19,7 +19,7 @@ public class Transitions {
          * @param args
          */
         //TODO: CHECK HOW CONVERION IS OCCURRING FOR XY IN arraylist POINTa / b
-        static final int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getDisplayMetrics());;
+        static final int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getDisplayMetrics());
         static final double sin = Math.sin(3.6);
 
         public static long F(int N) {
@@ -37,7 +37,30 @@ public class Transitions {
         }
     }
 
-    public static void reverseFibonacci() {}
+    public static void reverseFibonacci (ArrayList pointA, ArrayList pointB) {
+        /**
+         * Sedgewick & Wayne - Algorithms 4th .Ed. 2011 - MODDED
+         * @param args
+         */
+        //TODO: CHECK HOW CONVERION IS OCCURRING FOR XY IN arraylist POINTa / b
+        static final int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getDisplayMetrics());
+        static final double sin = Math.sin(3.6);
+
+        public static long F ( int N){
+            if (N == 0) return 0;
+            if (N == 1) return 1;
+            return F(N+2) - F(N+1); //reverse engineer the sequence
+        }
+
+        //Might work, from point B go to point A using rotation sin for each step fibonacci radial decrease
+        for (int j = pointB; j <= pointA; j++) {
+            for (int i = j; i < radius; i--) {
+                sin--;
+                F(i);
+            }
+        }
+    }
+
     public static void animate (){}
     public static void colourChange (){}
     public static void shuffle (){}
