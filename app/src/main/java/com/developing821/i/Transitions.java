@@ -36,7 +36,7 @@ public class Transitions {
             }
         }
     }
-
+    //TODO: reassess after going through the code once more about the compiled value of pA and pB
     public static void reverseFibonacci (ArrayList pointA, ArrayList pointB) {
         /**
          * Sedgewick & Wayne - Algorithms 4th .Ed. 2011 - MODDED
@@ -54,14 +54,61 @@ public class Transitions {
         }
     }
 
-    public static void animate (){}
-    public static void colourChange (){}
-    public static void shuffle (){}
+    /**
+     * simply receives integer and calls the respective method
+     * pre coded, some are standardised som hybrid.
+     * @param int type
+     */
+    public static void animate (int type){
+        switch(type) {
+            case 0:
+                //https://developer.android.com/training/animation/reveal-or-hide-view#Reveal
+                circular();
+                break;
+            case 1:
+                //https://developer.android.com/training/animation/reveal-or-hide-view#Crossfade
+                crossfade();
+                break;
+            case 2:
+                //https://developer.android.com/training/animation/zoom
+                zoom();
+                break;
+            case 3:
+                hybrid();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * When calling the type consider the method with which it is being applied
+     * below are the notes.
+     * @param int type
+     */
+    public static void colourChange (int type){
+        switch(type) {
+            case 0:
+                //For use with RadialGradient
+                Colours.gen();
+                break;
+            case 1:
+                //For use with canvas.paint
+                ColourGen.gen();
+                break;
+            default:
+                break;
+        }
+
+    }
+
     public static void prim (){}
     public static void mazeExploration (){}
     public static void circularRotation (){}
     public static void moveLettersOut() {}
     public static void moveLettersIn() {}
+
+
 
 
 }

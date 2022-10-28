@@ -143,6 +143,11 @@ public class Interface_Helper {
         return point; //pair, refactored, stops an automated feed to getScreenPointPair_N()
     }
 
+    
+    public static int pointAsInteger(ArrayList point) {
+        return point = point.get(0) * point.get(1);
+    }
+
     /**
      * Get the x value from the point pair
      * @param pair
