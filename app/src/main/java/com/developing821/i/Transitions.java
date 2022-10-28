@@ -43,14 +43,13 @@ public class Transitions {
          * @param args
          */
         //TODO: CHECK HOW CONVERION IS OCCURRING FOR XY IN arraylist POINTa / b
-        static final int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getDisplayMetrics());
+        static final int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pointA, getDisplayMetrics());
         static final double sin = Math.sin(3.6);
 
         //Might work, from point B go to point A using rotation sin for each step fibonacci radial decrease
         for (int j = pointB; j <= pointA; j++) {
-            for (int i = j;; j--) {
+            for (int i = j; i <= radius; j++) {
                 sin++;
-                radius++;
             }
         }
     }
