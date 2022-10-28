@@ -15,6 +15,8 @@ public class Transitions {
      * @param pointB
      */
     public static void fibonacci (ArrayList pointA, ArrayList pointB){
+        int A = pointAsInteger(pointA);
+        int B = pointAsInteger(pointB);
         /**
          * Sedgewick & Wayne - Algorithms 4th .Ed. 2011 - MODDED
          * @param args
@@ -30,7 +32,7 @@ public class Transitions {
         }
 
         //Might work, from point A go to point B using rotation sin for each step fibonacci radial increase
-        for (int j = pointA; j <= pointB; j++) {
+        for (int j = A; j <= B; j++) {
             for (int i = j; i < radius; i++) {
                 sin++;
                 F(i);
@@ -39,6 +41,8 @@ public class Transitions {
     }
     //TODO: reassess after going through the code once more about the compiled value of pA and pB
     public static void reverseFibonacci (ArrayList pointA, ArrayList pointB) {
+        int A = pointAsInteger(pointA);
+        int B = pointAsInteger(pointB);
         /**
          * Sedgewick & Wayne - Algorithms 4th .Ed. 2011 - MODDED
          * @param args
@@ -48,7 +52,7 @@ public class Transitions {
         static final double sin = Math.sin(3.6);
 
         //Might work, from point B go to point A using rotation sin for each step fibonacci radial decrease
-        for (int j = pointB; j <= pointA; j++) {
+        for (int j = B; j <= A; j++) {
             for (int i = j; i <= radius; i++) {
                 sin++;
             }
