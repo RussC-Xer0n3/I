@@ -143,8 +143,15 @@ public class Interface_Helper {
         return point; //pair, refactored, stops an automated feed to getScreenPointPair_N()
     }
 
-    
+
+    /**
+     * Calculates the pixel value according to u,v coords of the screen
+     * eto get an integer value returned.
+     * @param Arraylist point of pixel x,y values x 2
+     * @return
+     */
     public static int pointAsInteger(ArrayList point) {
+        //TODO: secure coding here
         return point = point.get(0) * point.get(1);
     }
 
