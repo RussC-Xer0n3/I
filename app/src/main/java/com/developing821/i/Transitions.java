@@ -1,11 +1,12 @@
 package com.developing821.i;
+import java.Math.*;
 
 public class Transitions {
 
     public static void expand (){}
     public static void contract (){}
-    public static void fadeIn (){}
-    public static void fadeOut (){}
+    public static void crossfadeIn (){}
+    public static void crossfadeOut (){}
 
     /**
      * Receive starting point A and end point B, helictically move point A to point B
@@ -48,7 +49,7 @@ public class Transitions {
 
         //Might work, from point B go to point A using rotation sin for each step fibonacci radial decrease
         for (int j = pointB; j <= pointA; j++) {
-            for (int i = j; i <= radius; j++) {
+            for (int i = j; i <= radius; i++) {
                 sin++;
             }
         }
@@ -67,14 +68,20 @@ public class Transitions {
                 break;
             case 1:
                 //https://developer.android.com/training/animation/reveal-or-hide-view#Crossfade
-                crossfade();
+                crossfadeIn();
                 break;
             case 2:
                 //https://developer.android.com/training/animation/zoom
-                zoom();
+                expand();
                 break;
             case 3:
                 hybrid();
+                break;
+            case 4:
+                contract();
+                break;
+            case 5:
+                crossfadeOut();
                 break;
             default:
                 break;
@@ -83,7 +90,7 @@ public class Transitions {
 
     /**
      * When calling the type consider the method with which it is being applied
-     * below are the notes.
+     * below are the notes. int 0 RadialGradient int 1 Canvas.paint()
      * @param int type
      */
     public static void colourChange (int type){
@@ -102,8 +109,22 @@ public class Transitions {
 
     }
 
-    public static void prim (){}
-    public static void mazeExploration (){}
+    public static void prim (ArrayList pointA, Arraylist pointB){
+        int A = pointAsInteger(pointA);
+        int B = pointAsInteger(pointB);
+        /**
+         * Sedgewick & Wayne - Algorithms 4th .Ed. 2011
+         */
+    }
+
+    public static void mazeExploration (ArrayList pointA, Arraylist pointB){
+        int A = pointAsInteger(pointA);
+        int B = pointAsInteger(pointB);
+        /**
+         * Sedgewick & Wayne - Algorithms 4th .Ed. 2011
+         */
+    }
+
     public static void circularRotation (){}
     public static void moveLettersOut() {}
     public static void moveLettersIn() {}
