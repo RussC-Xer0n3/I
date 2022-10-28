@@ -47,9 +47,10 @@ public class Transitions {
         static final double sin = Math.sin(3.6);
 
         //Might work, from point B go to point A using rotation sin for each step fibonacci radial decrease
-        for (int j = pointB; j <= radius; j++) {
+        for (int j = pointB; j <= pointA; j++) {
             for (int i = j;; j--) {
                 sin++;
+                radius++;
             }
         }
     }
