@@ -173,7 +173,7 @@ public class Mesh extends Interface_Helper {
         ArrayList<Object> connectionR = new ArrayList<>();
 
         //Return value
-        ArrayList<ArrayList<Object>>> pointB = new ArrayList<>();
+        ArrayList<ArrayList<Object>> pointB = new ArrayList<>();
 
         /**
          * Add all the points with their proximities to ArrayList
