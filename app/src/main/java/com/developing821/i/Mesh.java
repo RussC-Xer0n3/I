@@ -152,12 +152,17 @@ public class Mesh extends Interface_Helper {
         ArrayList<ArrayList<Object>> downRandom = new ArrayList<>(99);
 
         //Used in processing the connections to be added to connection TGR
+        //Random connections for both the top and lower half of the screen area
         ArrayList<ArrayList<Object>> connectionsT = new ArrayList<>();
         ArrayList<ArrayList<Object>> connections = new ArrayList<>();
         ArrayList<ArrayList<Object>> connectionsR = new ArrayList<>();
+
+        //Random connections in the top half of the screen area
         ArrayList<ArrayList<Object>> connectionsT1 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
+
+        //Random connections ini the lower half odf the screen area
         ArrayList<ArrayList<Object>> connectionsT2 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
