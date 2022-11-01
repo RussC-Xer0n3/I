@@ -199,12 +199,12 @@ public class Mesh extends Interface_Helper {
                 //if top and upRandom doesn't contain it, add it else add it to downRandom if not top
                 if (top == true && upRandom.get(99) == null) {
                     //Adds to the randomness because we then have variable heights from the 1000 samples
-                    if (!upRandom.contains(proximity_points.get(k).get(0))) {
-                        upRandom.add(new ArrayList<>(n.get(j)));
+                    if (!upRandom.contains(n.get(k))) {
+                        upRandom.add(new ArrayList<>(n));
                     }
                 } else if (top == false && downRandom.get(99) == null) {
-                    if (!downRandom.contains(proximity_points.get(k).get(0))) {
-                        downRandom.add(new ArrayList<>(n.get(j)));
+                    if (!downRandom.contains(n.get(k))) {
+                        downRandom.add(new ArrayList<>(n));
                     }
                 }
                 n.clear();
