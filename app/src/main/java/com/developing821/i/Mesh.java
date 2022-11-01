@@ -147,11 +147,11 @@ public class Mesh extends Interface_Helper {
      * [[
      *   [[x,y],ta,tc,ga,gc,ra,rc], [[x,y],ta,tc,ga,gc,ra,rc],
      *   [[x,y],ta,tc,ga,gc,ra,rc], [[x,y],ta,tc,ga,gc,ra,rc],
-     *   .... N pairs of connections
-     *  ],
+     *   .... N pairs of connection pairs
+     *  ], ..... inside conection
      * [],
      * []]
-     * 
+     *
      * @return 4-D ArrayList - of vertices and edges in the mesh with their proximities
      */
     protected ArrayList pointB() {
