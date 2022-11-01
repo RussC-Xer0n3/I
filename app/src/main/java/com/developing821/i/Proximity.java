@@ -37,9 +37,7 @@ public class Proximity extends Mesh {
      * @param n
      * @return null, just process
      */
-    public static Object Circumference(int pi, int n) { int i = pi * n;
-        return null;
-    }
+    public static Object Circumference(double pi, int n) { return pi * n; }
 
     /**
      * Calculate and return the Area given n value and Pi
@@ -47,34 +45,25 @@ public class Proximity extends Mesh {
      * @param n
      * @return Integer value of area
      */
-    public static void Area(int pi, int n) { int i = pi * (n * 2); }
+    public static Object Area(double pi, int n) { return (pi * n) * 2; }
 
     /**
      * The touch area we want to use in dp minimum 48dp (icon size)
      * @return
      */
-    public static Object Touch(int pi, int _touch_radius) {
-        Area(pi, _touch_radius);
-        return null;
-    }
+    public static Object Touch(double pi, int _touch_radius) { return Area(pi, _touch_radius); }
 
     /**
      * The 'green zone' area we want to use in dp minimum 96dp (icon size)
      * @return
      */
-    public static Object Green(int pi, int _green_radius) {
-        Area(pi, _green_radius);
-        return null;
-    }
+    public static Object Green(double pi, int _green_radius) { return Area(pi, _green_radius); }
 
     /**
      * The 'red zone' area we want to use in dp minimum 200dp (icon size)
      * @return
      */
-    public static Object Red(int pi, int _red_radius) {
-        Area(pi, _red_radius);
-        return null;
-    }
+    public static Object Red(double pi, int _red_radius) { Area(pi, _red_radius); }
 
     /**
      * Designed to create an arrayList for each point passed in
@@ -83,9 +72,9 @@ public class Proximity extends Mesh {
      * @return ArrayList proximity - the x,y and the areas and circumferences
      */
     public static ArrayList proximity(ArrayList point) {
-        ArrayList<ArrayList<Object> > proximity = new ArrayList<>();
+        ArrayList<ArrayList<Object>> proximity = new ArrayList<>();
 
-        proximity.get(0).add(point);
+        proximity.get(0).add(new ArrayList<> (point));
         proximity.get(1).add(Touch(pi, _touch_radius));
         proximity.get(2).add(Circumference(pi, _touch_radius));
         proximity.get(3).add(Green(pi, _green_radius));

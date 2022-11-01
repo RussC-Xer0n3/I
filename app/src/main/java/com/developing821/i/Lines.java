@@ -34,7 +34,7 @@ public class Lines {
     @RequiresApi(api = Build.VERSION_CODES.S)
     protected void drawLine(Canvas canvas, ArrayList pairA, ArrayList pairB) {
         paint.setColor(ColourGen.gen());
-        canvas.drawLine(pairA.indexOf(0), pairA.indexOf(1), pairB.indexOf(0), pairB.indexOf(1), paint);
+        canvas.drawLine(getScreenPointPair_X(pairA), getScreenPointPair_Y(pairA), getScreenPointPair_X(pairB), getScreenPointPair_Y(pairB), paint);
     }
 
     /**
@@ -73,16 +73,16 @@ public class Lines {
      * @return halfHorizontal - all points as pair values as a single arraylist
      */
     protected static ArrayList halfHorizontal() {
-        int l, k;
+        int y, x;
 
         ArrayList<ArrayList<Object>> halfHorizontal = new ArrayList<>();
 
         //set value half the height, iterate
-        for (l = getHalfHeight(); l <= getScreenWidth(); l++) {
-                k = l * getHalfHeight();
+        for (y = getHalfHeight(); y <= getScreenWidth(); y++) {
+                x = y * getHalfHeight();
                 //enforce x1 and y1 to stay at 0 and set the points on the halfway as a multiple to get the nth halfway
                 //Call to screenPointPair to add to out arraylist as points on the line
-                halfHorizontal.add(screenPointPair(k, l));
+                halfHorizontal.add(new ArrayList<>(screenPointPair(x, y)));
         }
         return halfHorizontal;
     }
@@ -97,8 +97,8 @@ public class Lines {
         int s, i, k;
         s = getScreenWidth() / n;
 
-        ArrayList<ArrayList<ArrayList<Object> > > points = new ArrayList<>(halfHorizontal());
-        ArrayList<ArrayList<Object> > horizontalPoints = new ArrayList<>();
+        points = halfHorizontal();
+        ArrayList<ArrayList<Object>> horizontalPoints = new ArrayList<>();
 
         //for the quantity n (200)
         for (k = 0; k <= n; k++) {
@@ -106,7 +106,7 @@ public class Lines {
             for (i = s; i <= n; i++) {
                 //for the object of j get the value at ith index of points
                 //add it to a new ArrayList
-                horizontalPoints.get(k).add(points.get(i));
+                horizontalPoints.add(new ArrayList<>(points.get(i)));
             }
         }
         return horizontalPoints;

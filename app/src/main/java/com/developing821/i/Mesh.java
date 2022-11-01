@@ -29,8 +29,11 @@ public class Mesh extends Interface_Helper {
      */
     public static ArrayList getRandomAreaPoint() {
         int s, k;
-        ArrayList<ArrayList <Integer> > areaPairs = new ArrayList<ArrayList <Integer>>(surfacePairs());
-        ArrayList<ArrayList <Object> > randomAreaPoint = new ArrayList<>();
+
+        ArrayList<ArrayList<Object>> areaPairs = new ArrayList<>();
+        areaPairs.add(new ArrayList<>(surfacePairs()));
+
+        ArrayList<ArrayList<Object>> randomAreaPoint = new ArrayList<>();
 
         //get the size of the entire array list
         s = areaPairs.size();
@@ -40,7 +43,7 @@ public class Mesh extends Interface_Helper {
 
         //Get the index location of the pair in the new array List
         for (k = 0; k <= 200; k++) {
-            randomAreaPoint.get(k).add(areaPairs.get(randomPoint.nextInt()));
+            randomAreaPoint.add(new ArrayList<>(areaPairs.get(0).get(randomPoint.nextInt()));
         }
         //Serve it to the masses :'D :'D !!
         return randomAreaPoint;
@@ -55,7 +58,7 @@ public class Mesh extends Interface_Helper {
     protected static ArrayList surfacePairs() {
         int x1, x2, y1, y2, i, j, k;
         int n = getScreenArea();
-        ArrayList<ArrayList <Object> > surfacePoints = new ArrayList<>();
+        ArrayList<ArrayList<Object>> surfacePoints = new ArrayList<>();
 
         x1 = 0;
         x2 = getScreenHeight();
@@ -68,7 +71,7 @@ public class Mesh extends Interface_Helper {
                 //set half the height as 0 and then any point at half way up as x2
                 for (j = x1; j <= x2; j++) {
                     //Call to screenPointPair to add to out arraylist as points on the surface area
-                    surfacePoints.get(k).add(screenPointPair(i, j));
+                    surfacePoints.add(new ArrayList<>(screenPointPair(i, j)));
                 }
             }
         }
@@ -85,22 +88,24 @@ public class Mesh extends Interface_Helper {
         final int _N = 200;
         int i;
 
-        ArrayList<ArrayList <Object> > halfwayLinePoints = new ArrayList<ArrayList <Object> >(halfHorizontalPoints(_N));
-        ArrayList<ArrayList <Object> > up = new ArrayList<>();
-        ArrayList<ArrayList <Object> > down = new ArrayList<>();
+        ArrayList<ArrayList<Object>> halfwayLinePoints = new ArrayList<>();
+        halfwayLinePoints.add(new ArrayList<>(halfHorizontalPoints(_N)));
+
+        ArrayList<ArrayList<Object>> up = new ArrayList<>();
+        ArrayList<ArrayList<Object>> down = new ArrayList<>();
 
         //Equally divide the the vertices on the horizontal line with alternation
-        for (i = 0; i <= halfwayLinePoints.lastIndexOf(halfwayLinePoints); i++) {
+        for (i = 0; i <= halfwayLinePoints.size(); i++) {
             if (i % 2 == 0) {
-                up.get(i).add(halfwayLinePoints.get(i));
+                up.add(new ArrayList<>(halfwayLinePoints.get(i)));
             } else {
-                down.get(i).add(halfwayLinePoints.get(i));
+                down.add(new ArrayList<>(halfwayLinePoints.get(i)));
             }
         }
 
-        ArrayList<ArrayList<Object> > equalPairs = new ArrayList();
-        equalPairs.get(0).add(up);
-        equalPairs.get(1).add(down);
+        ArrayList<ArrayList<Object>> equalPairs = new ArrayList();
+        equalPairs.add(new ArrayList<>(up));
+        equalPairs.add(new ArrayList<>(down));
 
         return equalPairs;
     }
@@ -112,15 +117,6 @@ public class Mesh extends Interface_Helper {
      * @return 2-D ArrayList pointA
      */
     protected ArrayList pointA() {
-        int i;
-
-        //Buffer
-        ArrayList<ArrayList <Object>> equal = new ArrayList<ArrayList <Object>>(equalPoints());
-
-        //pointA - get the first and second index of the 2 dimensional array to Object is an x,y ArrayList containing two points
-        ArrayList<ArrayList<Object>> up = new ArrayList<>();
-        ArrayList<ArrayList<Object>> down = new ArrayList<>();
-
         //Return 2-d ArrayList
         ArrayList<ArrayList<Object>> pointA = new ArrayList<>();
 
@@ -131,14 +127,8 @@ public class Mesh extends Interface_Helper {
          *   1 [], [], [].... ]
          * into two separate ArrayLists
          */
-        for (i = 0; i <= equal.get(i).size(); i++) {
-            //Should be getting index 0 and adding each ith value inside the arraylist same for index 1
-            up.get(i).add(equal.get(0).indexOf(i));
-            down.get(i).add(equal.get(1).indexOf(i));
-        }
-
-        pointA.get(0).add(up);
-        pointA.get(1).add(down);
+        pointA.add(new ArrayList<>(equalPoints.get(0)); //up
+        pointA.add(new ArrayList<>(equalPoints.get(1)); //down
 
         return pointA;
     }
@@ -156,7 +146,7 @@ public class Mesh extends Interface_Helper {
         int j, k, m, o, p;
 
         //Buffer
-        ArrayList<ArrayList <Object>> proximity_points = new ArrayList<>();
+        ArrayList<ArrayList<Object>> proximity_points = new ArrayList<>();
 
         //pointB - Set the random direction point of each vertices in up and down arraylists
         ArrayList<ArrayList<Object>> upRandom = new ArrayList<>(99);
@@ -186,7 +176,7 @@ public class Mesh extends Interface_Helper {
          * @return Multi-dimensional Arraylist [[x,y], Object, Object, Object, Object, Object, Object]
          */
         for (m = 0; m <= 1000; m++) {
-            proximity_points.add(Proximity.proximity(getRandomAreaPoint()));
+            proximity_points.add(new ArrayList<>(Proximity.proximity(getRandomAreaPoint())));
         }
 
         //Data processor buffer
@@ -205,12 +195,12 @@ public class Mesh extends Interface_Helper {
                 //if top and upRandom doesn't contain it, add it else add it to downRandom if not top
                 if (top == true && upRandom.get(99) == null) {
                     //Adds to the randomness because we then have variable heights from the 1000 samples
-                    if (!upRandom.contains(proximity_points.get(k).indexOf(0))) {
-                        upRandom.add((ArrayList<Object>) proximity_points.get(j));
+                    if (!upRandom.contains(proximity_points.get(k).get(0))) {
+                        upRandom.add(new ArrayList<>(n.get(j)));
                     }
                 } else if (top == false && downRandom.get(99) == null) {
-                    if (!downRandom.contains(proximity_points.get(k).indexOf(0))) {
-                        downRandom.add((ArrayList<Object>) proximity_points.get(j));
+                    if (!downRandom.contains(proximity_points.get(k).get(0))) {
+                        downRandom.add(new ArrayList<>(n.get(j)));
                     }
                 }
                 n.clear();
@@ -229,27 +219,27 @@ public class Mesh extends Interface_Helper {
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 //How to connect if in the Red zone
-                if (upRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
-                    connectionsR.get(0).add(upRandom.get(o));
-                    connectionsR.get(1).add(downRandom.get(p));
-                    connectionR.add(connectionsR);
+                if (upRandom.get(o).get(7) == downRandom.get(p).get(2)) {
+                    connectionsR.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsR.add(new ArrayList<>(downRandom.get(p)));
+                    connectionR.add(new ArrayList<>(connectionsR));
                     //clear the buffer
                     connectionsR.clear();
                 }
 
                 //How to connect if in the Green zone
-                if (upRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    connections.get(0).add(upRandom.get(o));
-                    connections.get(1).add(downRandom.get(p));
-                    connectionG.add(connections);
+                if (upRandom.get(o).get(4) == downRandom.get(p).get(0)) {
+                    connections.add(new ArrayList<>(upRandom.get(o)));
+                    connections.add(new ArrayList<>(downRandom.get(p)));
+                    connectionG.add(new ArrayList<>(connections));
                     connections.clear();
                 }
 
                 //How to connect if in the touch zone
-                if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
-                    connectionsT.get(0).add(upRandom.get(o));
-                    connectionsT.get(1).add(downRandom.get(p));
-                    connectionT.add(connectionsT);
+                if (upRandom.get(o).get(2) == downRandom.get(p).get(2)) {
+                    connectionsT.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsT.add(new ArrayList<>(downRandom.get(p)));
+                    connectionT.add(new ArrayList<>(connectionsT));
                     connectionsT.clear();
                 }
             }
@@ -259,27 +249,27 @@ public class Mesh extends Interface_Helper {
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 //How to connect if in the Red zone
-                if (upRandom.get(o).indexOf(7) == upRandom.get(p).indexOf(2)) {
-                    connectionsR1.get(0).add(upRandom.get(o));
-                    connectionsR1.get(1).add(downRandom.get(p));
-                    connectionR.add(connectionsR1);
+                if (upRandom.get(o).get(7) == upRandom.get(p).get(2)) {
+                    connectionsR1.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsR1.add(new ArrayList<>(downRandom.get(p)));
+                    connectionR.add(new ArrayList<>(connectionsR1));
                     connectionsR1.clear();
                 }
 
                 //How to connect if in the Green zone
-                if (upRandom.get(o).indexOf(4) == upRandom.get(p).indexOf(0)) {
-                    connections1.get(0).add(upRandom.get(o));
-                    connections1.get(1).add(upRandom.get(p));
-                    connectionG.add(connections1);
+                if (upRandom.get(o).get(4) == upRandom.get(p).get(0)) {
+                    connections1.add(new ArrayList<>(upRandom.get(o)));
+                    connections1.add(new ArrayList<>(upRandom.get(p)));
+                    connectionG.add(new ArrayList<>(connections1));
                     //clear the buffer
                     connections1.clear();
                 }
 
                 //How to connect if in the touch zone
-                if (upRandom.get(o).indexOf(2) == upRandom.get(p).indexOf(2)) {
-                    connectionsT1.get(0).add(upRandom.get(o));
-                    connectionsT1.get(1).add(downRandom.get(p));
-                    connectionT.add(connectionsT1);
+                if (upRandom.get(o).get(2) == upRandom.get(p).get(2)) {
+                    connectionsT1.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsT1.add(new ArrayList<>(downRandom.get(p)));
+                    connectionT.add(new ArrayList<>(connectionsT1));
                     connectionsT1.clear();
                 }
             }
@@ -289,35 +279,35 @@ public class Mesh extends Interface_Helper {
         for (o = 0; o <= 100; o++) {
             for (p = 0; p <= 100; p++) {
                 //How to connect if in the Red zone
-                if (downRandom.get(o).indexOf(7) == downRandom.get(p).indexOf(2)) {
-                    connectionsR2.get(0).add(upRandom.get(o));
-                    connectionsR2.get(1).add(downRandom.get(p));
-                    connectionR.add(connectionsR2);
+                if (downRandom.get(o).get(7) == downRandom.get(p).get(2)) {
+                    connectionsR2.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsR2.add(new ArrayList<>(downRandom.get(p)));
+                    connectionR.add(new ArrayList<>(connectionsR2));
                     connectionsR2.clear();
                 }
 
                 //How to connect if in the Green zone
-                if (downRandom.get(o).indexOf(4) == downRandom.get(p).indexOf(0)) {
-                    connections2.get(0).add(downRandom.get(o));
-                    connections2.get(1).add(downRandom.get(p));
-                    connectionG.add(connections2);
+                if (downRandom.get(o).get(4) == downRandom.get(p).get(0)) {
+                    connections2.add(new ArrayList<>(downRandom.get(o)));
+                    connections2.add(new ArrayList<>(downRandom.get(p)));
+                    connectionG.add(new ArrayList<>(connections2));
                     connections2.clear();
                 }
 
                 //How to connect if in the touch zone
-                if (upRandom.get(o).indexOf(2) == downRandom.get(p).indexOf(2)) {
-                    connectionsT2.get(0).add(upRandom.get(o));
-                    connectionsT2.get(1).add(downRandom.get(p));
-                    connectionT.add(connectionsT2);
+                if (upRandom.get(o).get(2) == downRandom.get(p).get(2)) {
+                    connectionsT2.add(new ArrayList<>(upRandom.get(o)));
+                    connectionsT2.add(new ArrayList<>(downRandom.get(p)));
+                    connectionT.add(new ArrayList<>(connectionsT2));
                     connectionsT2.clear();
                 }
             }
         }
 
         //Add the three
-        pointB.get(0).add(connectionT);
-        pointB.get(1).add(connectionG);
-        pointB.get(2).add(connectionR);
+        pointB.add(new ArrayList<>(connectionT));
+        pointB.add(new ArrayList<>(connectionG));
+        pointB.add(new ArrayList<>(connectionR));
 
         connectionT.clear();
         connectionG.clear();

@@ -138,8 +138,8 @@ public class Interface_Helper {
      */
     public static ArrayList screenPointPair(int x, int y) {
         ArrayList point = new ArrayList(2);
-        point.add(0, x);
-        point.add(1, y);
+        point.add(x);
+        point.add(y);
         return point; //pair, refactored, stops an automated feed to getScreenPointPair_N()
     }
 
@@ -161,7 +161,7 @@ public class Interface_Helper {
      * @return index 0 from the pair
      */
     public static int getScreenPointPair_X(ArrayList pair) {
-        return pair.indexOf(0);
+        return pair.get(0);
     }
 
     /**
@@ -170,7 +170,7 @@ public class Interface_Helper {
      * @return index 1 from the pair
      */
     public static int getScreenPointPair_Y(ArrayList pair) {
-        return pair.indexOf(1);
+        return pair.get(1);
     }
 
     /**
@@ -188,7 +188,7 @@ public class Interface_Helper {
         for (i = 0; i <= 1; i++){
             switch (i) {
                 case 0:
-                    if ((int) pair.get(1) >= getHalfHeight()) {
+                    if ((int) getScreenPointPair_X(pair) >= getHalfHeight()) {
                         top = true;
                     } else {
                         top = false;
