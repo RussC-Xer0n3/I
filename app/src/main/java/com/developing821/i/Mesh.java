@@ -119,6 +119,7 @@ public class Mesh extends Interface_Helper {
         ArrayList<ArrayList<Object>> pointA = new ArrayList<>();
 
         //pointA - Set pointA vertices
+        equalPoints = equalPoints();
         /**
          * Separates and extracts a multi-dimensional ArrayList of ArrayLists
          * [ 0 [], [], []....
