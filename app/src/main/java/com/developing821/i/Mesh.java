@@ -162,7 +162,7 @@ public class Mesh extends Interface_Helper {
         ArrayList<ArrayList<Object>> connections1 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connectionsR1 = new ArrayList<>();
 
-        //Random connections ini the lower half odf the screen area
+        //Random connections in the lower half odf the screen area
         ArrayList<ArrayList<Object>> connectionsT2 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connections2 = new ArrayList<>();
         ArrayList<ArrayList<Object>> connectionsR2 = new ArrayList<>();
@@ -173,7 +173,7 @@ public class Mesh extends Interface_Helper {
         ArrayList<Object> connectionR = new ArrayList<>();
 
         //Return value
-        ArrayList<ArrayList<ArrayList<Object>>> pointB = new ArrayList<>();
+        ArrayList<ArrayList<Object>>> pointB = new ArrayList<>();
 
         /**
          * Add all the points with their proximities to ArrayList
