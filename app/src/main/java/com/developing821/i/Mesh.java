@@ -20,36 +20,6 @@ public class Mesh extends Interface_Helper {
     private Paint paint = new Paint();
 
     /**
-     * Gather and return the x,y coordinates in a uw pair for
-     * the purposes of randomising pixels points for connectivity
-     * and returning their x,y coordinate locations for processing
-     * if required
-     *
-     * @return ArrayList pair of x,y Coordinates
-     */
-    public static ArrayList getRandomAreaPoint() {
-        int s, k;
-
-        ArrayList<ArrayList<Object>> areaPairs = new ArrayList<>();
-        areaPairs.add(new ArrayList<>(surfacePairs()));
-
-        ArrayList<ArrayList<Object>> randomAreaPoint = new ArrayList<>();
-
-        //get the size of the entire array list
-        s = areaPairs.size();
-
-        //randomise a point based on the size
-        Random randomPoint = new Random(s);
-
-        //Get the index location of the pair in the new array List
-        for (k = 0; k <= 200; k++) {
-            randomAreaPoint.add(new ArrayList<>(areaPairs.get(0).get(randomPoint.nextInt()));
-        }
-        //Serve it to the masses :'D :'D !!
-        return randomAreaPoint;
-    }
-
-    /**
      * Cycles through with a (N(log(N))) for loop to calculate and add all
      * coordinate pairs of the screen dimensions to an arraylist
      *
@@ -76,6 +46,34 @@ public class Mesh extends Interface_Helper {
             }
         }
         return surfacePoints;
+    }
+
+    /**
+     * Gather and return the x,y coordinates in a uw pair for
+     * the purposes of randomising pixels points for connectivity
+     * and returning their x,y coordinate locations for processing
+     * if required
+     *
+     * @return ArrayList pair of x,y Coordinates
+     */
+    public static ArrayList getRandomAreaPoint() {
+        int s, k;
+
+        areaPairs = surfacePairs();
+        ArrayList<ArrayList<Object>> randomAreaPoint = new ArrayList<>();
+
+        //get the size of the entire array list
+        s = areaPairs.size();
+
+        //randomise a point based on the size
+        Random randomPoint = new Random(s);
+
+        //Get the index location of the pair in the new array List
+        for (k = 0; k <= 200; k++) {
+            randomAreaPoint.add(new ArrayList<>(areaPairs.get(randomPoint.nextInt()));
+        }
+        //Serve it to the masses :'D :'D !!
+        return randomAreaPoint;
     }
 
     /**
