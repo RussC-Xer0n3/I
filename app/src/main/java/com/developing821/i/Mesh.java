@@ -133,12 +133,25 @@ public class Mesh extends Interface_Helper {
     }
     /**
      * We want to generate random points and link them to other points to draw the mesh
-     * In this instance we will look at MST and Spanning Forests making use of other methods
-     * to both draw the vertices and the edge (line) between each vertices representing
-     * connectivity points. We will work on the animation later and vertices are set at
-     * 200 constantly. Point A int the animation is from the horizontal line and point B
-     * the randomised end point of a restricted exploratory algorithm.
+     * In this instance we will not look at MST and Spanning Forests and make use of other methods
+     * to both make connections  between each vertices representing connectivity points.
+     * We will work on the animation later and vertices are set at
+     * 200 constantly.
      *
+     * Point A int the animation is from the horizontal line and point B (herein) are the
+     * randomised end points of a restricted exploratory algorithm housed in connection ArrayLists.
+     *
+     * In short, pointB is our mesh in the following form each index of 0 - 2 houses connections
+     * in the following format ...
+     *
+     * [[
+     *   [[x,y],ta,tc,ga,gc,ra,rc], [[x,y],ta,tc,ga,gc,ra,rc],
+     *   [[x,y],ta,tc,ga,gc,ra,rc], [[x,y],ta,tc,ga,gc,ra,rc],
+     *   .... N pairs of connections
+     *  ],
+     * [],
+     * []]
+     * 
      * @return 4-D ArrayList - of vertices and edges in the mesh with their proximities
      */
     protected ArrayList pointB() {
@@ -313,9 +326,11 @@ public class Mesh extends Interface_Helper {
         pointB.add(new ArrayList<>(connectionG));
         pointB.add(new ArrayList<>(connectionR));
 
+        //Clear out the connections since we have them in storage per ArrayList Point
         connectionT.clear();
         connectionG.clear();
         connectionR.clear();
+
         //Return an array of vertices and edges
         return pointB;
     }
