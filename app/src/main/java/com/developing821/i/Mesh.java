@@ -70,7 +70,7 @@ public class Mesh extends Interface_Helper {
 
         //Get the index location of the pair in the new array List
         for (k = 0; k <= 200; k++) {
-            randomAreaPoint.add(new ArrayList<>(areaPairs.get(randomPoint.nextInt()));
+            randomAreaPoint.add(new ArrayList<>(areaPairs.get(randomPoint.nextInt())));
         }
         //Serve it to the masses :'D :'D !!
         return randomAreaPoint;
@@ -126,8 +126,8 @@ public class Mesh extends Interface_Helper {
          *   1 [], [], [].... ]
          * into two separate ArrayLists
          */
-        pointA.add(new ArrayList<>(equalPoints.get(0)); //up
-        pointA.add(new ArrayList<>(equalPoints.get(1)); //down
+        pointA.add(new ArrayList<>(equalPoints.get(0))); //up
+        pointA.add(new ArrayList<>(equalPoints.get(1))); //down
 
         return pointA;
     }
